@@ -28,4 +28,9 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 #第三方库模块
 list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR/cmake/modules})
 
+include(libs/core/module.cmake)
+include(libs/utility/module.cmake)
+
+add_subdirectory(libs/core)
+
 add_subdirectory(src)

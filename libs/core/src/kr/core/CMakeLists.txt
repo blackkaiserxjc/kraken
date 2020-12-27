@@ -1,0 +1,11 @@
+find_package(Boost REQUIRED)
+
+include_directories(${Boost_INCLUDE_DIRS})
+
+set(kr_common_core_SRCS
+    config.h
+    config.cpp
+)
+
+add_library(kr_common_core ${kr_common_core_SRCS})
+set_target_properties(kr_common_core PROPERTIES FOLDER CommonTargets/Core)

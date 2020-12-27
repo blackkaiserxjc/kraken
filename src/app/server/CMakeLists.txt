@@ -13,13 +13,14 @@ find_program(LUAC_EXECUTABLE NAMES luac PATH_SUFFIXES lua)
 # -- 源码
 set(kr_app_server_SRCS
     main.cpp
-)
+    )
 
 add_executable(kr_app_server
     ${kr_app_server_SRCS}
 )
 
 target_link_libraries(kr_app_server
+    kr_common_core
     ${FMT_LIBRARIES}
     ${LUA_LIBRARIES}
     ${PROTOBUF_LIBRARIES}
