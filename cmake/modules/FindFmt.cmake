@@ -8,7 +8,7 @@
 find_path(FMT_INCLUDE_DIR NAMES fmt/core.h)
 
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
-    find_library(FMT_LIBRARIES NAMES fmtd)
+    find_library(FMT_LIBRARIES NAMES fmt)
 else()
     find_library(FMT_LIBRARIES NAMES fmt)
 endif()

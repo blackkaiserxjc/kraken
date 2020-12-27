@@ -6,6 +6,9 @@ if (NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE "Debug")
 endif()
 
+# 开启测试
+enable_testing()
+
 # 平台相关
 if (MSVC)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /Zi /EHs /DEBUG /std:c++latest")
@@ -28,9 +31,12 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 #第三方库模块
 list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR/cmake/modules})
 
+# 核心库
 include(libs/core/module.cmake)
 include(libs/utility/module.cmake)
 
 add_subdirectory(libs/core)
+add_subdirectory(libs/utility)
 
+# 服务
 add_subdirectory(src)

@@ -1,6 +1,8 @@
 find_package(Boost REQUIRED)
+find_package(ZLIB REQUIRED)
 
 include_directories(${Boost_INCLUDE_DIRS})
+include_directories(${ZLIB_INCLUDE_DIRS})
 
 set(kr_common_core_SRCS
     config.h
