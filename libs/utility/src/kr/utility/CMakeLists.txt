@@ -9,5 +9,9 @@ set(kr_common_utility_SRCS
     auto_timer.cpp
 )
 
-add_library(kr_common_utility ${kr_common_utility_SRCS})
+set(kr_common_utility_detail_SRCS
+    detail/auto_timer.h
+)
+
+add_library(kr_common_utility ${kr_common_utility_SRCS} ${kr_common_utility_detail_SRCS})
 set_target_properties(kr_common_utility PROPERTIES FOLDER CommonTargets/Utility)

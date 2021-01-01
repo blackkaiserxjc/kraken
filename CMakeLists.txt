@@ -29,7 +29,7 @@ option(CMAKE_Cxx_CREATE_STATIC_LIBRARY "Build static library" ON)
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 #第三方库模块
-list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR/cmake/modules})
+list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake/modules")
 
 # 核心库
 include(libs/core/module.cmake)

@@ -6,7 +6,8 @@ include_directories(${ZLIB_INCLUDE_DIRS})
 
 set(kr_common_core_SRCS
     config.h
-    config.cpp
+    core.cpp
+    core.h
 )
 
 add_library(kr_common_core ${kr_common_core_SRCS})

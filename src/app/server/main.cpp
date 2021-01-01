@@ -1,6 +1,4 @@
-#include <iostream>
-#include <memory>
-
-int main() {
+int main()
+{
     return 0;
 }

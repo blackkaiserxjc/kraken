@@ -1,97 +1,104 @@
 #ifndef KR_COMMON_UTILITY_AUTO_TIMER_H_
 #define KR_COMMON_UTILITY_AUTO_TIMER_H_
 
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include <chrono>
 #include <optional>
 #include <string>
 #include <string_view>
 #include <type_traits>
 
-#include <fmt/core.h>
-
 namespace kr {
-    namespace utility {
-        // 默认日志
-        enum class LoggerStyle {SECONDS, PRETTY};
-        template <LoggerStyle>
-        struct Logger;
+namespace utility {
 
-        template <
-                class Logger = Logger<LoggerStyle::SECONDS>,
-                class Clock = std::chrono::high_resolution_clock>
-        class auto_timer final {
-        public:
-            using DoubleSeconds = std::chrono::duration<double>;
+// 执行时间分析工具类
+template <class Logger, class Clock>
+class basic_auto_timer final
+{
+public:
+    using value_type = std::chrono::duration<double>;
 
-            explicit auto_timer(
-                    std::string &&msg = "",
-                    const DoubleSeconds &min_time_to_log = DoubleSeconds::zero(),
-                    Logger &&logger = Logger())
-                : message_(std::move(msg)),
-                  min_time_to_log_(min_time_to_log),
-                  logger_(std::move(logger)) {}
+    /**
+     * 构造函数
+     * @param msg
+     * @param min_time_to_log
+     * @param logger
+     */
+    explicit basic_auto_timer(std::string&& msg = "",
+                              const value_type& min_time_to_log = value_type::zero(),
+                              Logger&& logger = Logger());
 
-            auto_timer(const auto_timer &) = delete;
-            auto_timer(auto_timer &&) = default;
-            auto_timer &operator=(const auto_timer &) = delete;
-            auto_timer &operator=(auto_timer &&) = default;
+    /** 析构函数 **/
+    ~basic_auto_timer();
 
-            ~auto_timer() {
-                if (message_) {
-                    log(message_.value());
-                }
-            }
+    /** 禁用复制和赋值 **/
+    basic_auto_timer(const basic_auto_timer&) = delete;
+    basic_auto_timer& operator=(const basic_auto_timer&) = delete;
 
-            DoubleSeconds log(std::string_view msg = "") {
-                return log_impl(Clock::now(), msg);
-            }
+    /**
+     * 日志
+     * @param msg   信息
+     * @return      间隔时间
+     */
+    auto log(std::string_view msg = "");
 
-            template<typename... Args>
-            DoubleSeconds log_format(Args &&...args) {
-                auto now = Clock::now();
-                return log_impl(now, fmt::format(std::forward<Args>(args)...));
-            }
+    /**
+     * 格式化日志
+     * @param format 格式串
+     * @param args   变参数集
+     * @return       间隔时间
+     */
+    template<class Format, class... Args>
+    auto log_format(Format&& format, Args&&... args);
 
-        private:
-            DoubleSeconds log_impl(std::chrono::time_point<Clock> now, std::string_view msg) {
-                auto duration = now - start_;
-                if (duration >= min_time_to_log_) {
-                    logger_(msg, duration);
-                }
-                start_ = Clock::now();
-                return duration;
-            }
+private:
+    // 日志实现
+    auto log_impl(std::chrono::time_point<Clock> now, std::string_view msg);
 
-            std::optional<std::string> message_;
-            std::chrono::time_point<Clock> start_;
-            DoubleSeconds min_time_to_log_;
-            Logger logger_;
-        };
+    // 日志信息
+    std::optional<std::string> message_;
 
-        template<
-                class Logger = Logger<LoggerStyle::SECONDS>,
-                class Clock = std::chrono::high_resolution_clock>
-        auto make_auto_timer(std::string &&msg = "",
-                             const std::chrono::duration<double> &min_time_to_log = std::chrono::duration<double>::zero(),
-                             Logger &&logger = Logger()) {
-            return auto_timer<Logger, Clock>(std::move(msg), min_time_to_log, std::move(logger));
-        }
+    // 开始时间点
+    std::chrono::time_point<Clock> start_;
 
-        template <LoggerStyle Style>
-        struct Logger final {
-            void operator()(std::string_view msg, const std::chrono::duration<double>& sec) const {
-                if (msg.empty()) {
-                    return;
-                }
+    // 最小间隔时间
+    value_type min_time_to_log_;
 
-                if (Style == LoggerStyle::PRETTY) {
+    // 日志器
+    Logger logger_;
+};
 
-                } else {
-                    std::cout << "msg" << "in " << sec.count() << " seconds";
-                }
-            }
-        };
-    }// namespace utility
+// 默认日志器
+struct logger final {
+    /**
+     * 重载括号
+     * @param msg  日志信息
+     * @param sec  时间间隔
+     */
+    void operator()(std::string_view msg, const std::chrono::duration<double>& sec) const;
+};
+
+// 外部使用类型
+template <class Logger, class Clock>
+using auto_timer = basic_auto_timer<logger, std::chrono::high_resolution_clock>;
+
+// 生产器
+template<
+    class Logger = logger,
+    class Clock = std::chrono::high_resolution_clock>
+auto make_auto_timer(std::string &&msg = "",
+                     const std::chrono::duration<double> &min_time_to_log =
+                        std::chrono::duration<double>::zero(),
+                     Logger &&logger = Logger()) {
+    return basic_auto_timer<Logger, Clock>(std::move(msg), min_time_to_log, std::move(logger));
+}
+
+}// namespace utility
 }// namespace kr
+
+#include <kr/utility/detail/auto_timer.h>
 
 #endif
