@@ -33,6 +33,7 @@ list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake/modules")
 
 # 核心库
 include(libs/core/module.cmake)
+include(libs/logging/module.cmake)
 include(libs/utility/module.cmake)
 
 add_subdirectory(libs/core)

@@ -24,7 +24,6 @@ inline constexpr std::uint32_t hash_str(std::string_view sv) {
     result.process_bytes(sv.data(), sv.length());
     return result.checksum();
 }
-
 } // utility
 } // kr
 
