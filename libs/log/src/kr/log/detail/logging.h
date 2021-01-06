@@ -19,7 +19,7 @@ constexpr std::size_t names_count = 6;
 
 template<typename CharT, typename TraitsT>
 std::basic_string<CharT, TraitsT> to_string(severity_level level) {
-    static std::array<std::string, names_count> level_names = {"TRACE","DEBUG","INFO","WARN","ERROR","FATAL"};
+    static std::array<std::string, names_count> level_names = {"TRACE", "DEBUG", "INFO", "WARN", "ERROR", "FATAL"};
     if (static_cast<std::size_t>(level) < names_count) {
         return level_names[static_cast<std::size_t>(level)];
     }
@@ -28,8 +28,8 @@ std::basic_string<CharT, TraitsT> to_string(severity_level level) {
 
 template<typename CharT, typename TraitsT>
 bool from_string(const std::basic_string<CharT, TraitsT> &str, severity_level &level) {
-    static std::array<std::string, names_count> level_names = {"TRACE","DEBUG","INFO","WARN","ERROR","FATAL"};
-    auto iter = std::find_if(level_names.begin(), level_names.end(), [&](auto&& value) {
+    static std::array<std::string, names_count> level_names = {"TRACE", "DEBUG", "INFO", "WARN", "ERROR", "FATAL"};
+    auto iter = std::find_if(level_names.begin(), level_names.end(), [&](auto &&value) {
         return std::equal(str.begin(), str.end(), value.begin(), value.end());
     });
 
@@ -71,7 +71,7 @@ ValueType logger_mt::set_attr_value(const char* name, ValueType value) {
     return attr.get();
 }
 
-}
-}
+} // log
+} // kr
 
 #endif //KR_COMMON_LOGGING_DETAIL_LOGGER_H_

@@ -1,4 +1,4 @@
-find_package(Boost REQUIRED system log log_setup filesystem thread regex date_time unit_test_framework)
+find_package(Boost REQUIRED atomic date_time filesystem log log_setup regex system thread unit_test_framework)
 
 include_directories(${Boost_INCLUDE_DIRS})
 
@@ -10,13 +10,14 @@ set(kr_common_log_test_SRCS
 add_executable(kr_common_log_test ${kr_common_log_test_SRCS})
 target_link_libraries(kr_common_log_test
     kr_common_log
-    ${Boost_SYSTEM_LIBRARY}
-    ${Boost_FILESYSTEM_LIBRARY}
-    ${Boost_THREAD_LIBRARY}
-    ${Boost_LOG_SETUP_LIBRARY}
-    ${Boost_LOG_LIBRARY}
-    ${Boost_REGEX_LIBRARY}
+    ${Boost_ATOMIC_LIBRARY}
     ${Boost_DATE_TIME_LIBRARY}
+    ${Boost_FILESYSTEM_LIBRARY}
+    ${Boost_LOG_LIBRARY}
+    ${Boost_LOG_SETUP_LIBRARY}
+    ${Boost_REGEX_LIBRARY}
+    ${Boost_SYSTEM_LIBRARY}
+    ${Boost_THREAD_LIBRARY}
     ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY}
     ${CMAKE_THREAD_LIBS_INIT}
 )
