@@ -5,7 +5,7 @@
 # FMT_LIBRARY, fmtlib libraries
 # FMT_FOUND, If false, do not try to use fmt
 
-find_path(FMT_INCLUDE_DIRS NAMES fmt/core.h)
+find_path(FMT_INCLUDE_DIRS NAMES fmt/format.h)
 
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
     find_library(FMT_LIBRARIES NAMES fmt)
@@ -17,6 +17,7 @@ include(FindPackageHandleStandardArgs)
 find_package_handle_standard_args(Fmt DEFAULT_MSG FMT_INCLUDE_DIRS FMT_LIBRARIES)
 
 mark_as_advanced(FMT_INCLUDE_DIRS FMT_LIBRARIES)
+
 
 
 

@@ -15,7 +15,7 @@
 - `cmake -G "Visual Studio 15 2017" -DCMAKE_BUILD_TYPE=Release -DCMAKE_TOOLCHAIN_FILE=G:/Code/3rdParty/vcpkg/scripts/buildsystems/vcpkg.cmake -DVCPKG_TARGET_TRIPLET=x86-windows-static -DCMAKE_INSTALL_PREFIX=../../install/debug ../..`
 
 
-### Linux编译
+#### Linux编译
 > Debug版本
 - `mkdir -p build/debug` 
 - `cd build/debug`

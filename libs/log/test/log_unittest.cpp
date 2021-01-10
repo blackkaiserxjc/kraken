@@ -10,6 +10,7 @@
 #include <boost/log/expressions.hpp>
 #include <boost/log/sinks/text_ostream_backend.hpp>
 #include <boost/log/sinks/sync_frontend.hpp>
+#include <boost/log/utility/setup/from_stream.hpp>
 
 #include <kr/log/logging.h>
 

@@ -19,7 +19,6 @@
 #include <boost/log/sources/severity_channel_logger.hpp>
 #include <boost/log/sources/record_ostream.hpp>
 #include <boost/log/utility/setup/common_attributes.hpp>
-#include <boost/log/utility/setup/from_stream.hpp>
 
 namespace kr {
 namespace log {
