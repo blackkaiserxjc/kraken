@@ -15,15 +15,17 @@ basic_auto_timer<Logger, Clock>::basic_auto_timer(
         std::string&& msg,
         const value_type& min_time_to_log,
         Logger&& logger)
-        : message_(std::move(msg)),
-          min_time_to_log_(min_time_to_log),
-          logger_(std::move(logger))
+    : message_(std::move(msg)),
+    min_time_to_log_(min_time_to_log),
+    logger_(std::move(logger))
 {
 }
 
 template <class Logger, class Clock>
-basic_auto_timer<Logger, Clock>::~basic_auto_timer() {
-    if (message_) {
+basic_auto_timer<Logger, Clock>::~basic_auto_timer()
+{
+    if (message_)
+    {
         log(message_.value());
     }
 }
@@ -46,7 +48,8 @@ template <class Logger, class Clock>
 auto basic_auto_timer<Logger, Clock>::log_impl(std::chrono::time_point<Clock> now, std::string_view msg)
 {
     auto duration = now - start_;
-    if (duration >= min_time_to_log_) {
+    if (duration >= min_time_to_log_)
+    {
         logger_(msg, duration);
     }
     start_ = Clock::now();
