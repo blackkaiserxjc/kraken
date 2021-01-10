@@ -13,8 +13,8 @@ target_link_libraries(kr_common_log_test
     ${Boost_ATOMIC_LIBRARY}
     ${Boost_DATE_TIME_LIBRARY}
     ${Boost_FILESYSTEM_LIBRARY}
-    ${Boost_LOG_LIBRARY}
     ${Boost_LOG_SETUP_LIBRARY}
+    ${Boost_LOG_LIBRARY}
     ${Boost_REGEX_LIBRARY}
     ${Boost_SYSTEM_LIBRARY}
     ${Boost_THREAD_LIBRARY}
