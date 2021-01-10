@@ -5,14 +5,15 @@
 
 #include <boost/program_options.hpp>
 #include <boost/log/utility/setup/from_stream.hpp>
-
 #include <sol/sol.hpp>
+
+#include <kr/log/logging.h>
 
 int main(int argc, char *argv[])
 {
     boost::program_options::options_description desc("Alloed options");
     desc.add_options()
-        ("help", "help message.");
+        ("help", "help message.")
         ("config", boost::program_options::value<std::string>()->default_value("etc/server.app.lua"), "server config file path");
 
     boost::program_options::variables_map vm;
@@ -40,5 +41,8 @@ int main(int argc, char *argv[])
         std::ifstream settings(*log_conf);
         boost::log::init_from_stream(settings);
     }
+
+    kr::log::logger_mt logger("server");
+    KRLOG_DEBUG(logger, "main") << "logger init.";
     return EXIT_SUCCESS;
 }
