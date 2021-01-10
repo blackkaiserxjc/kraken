@@ -7,10 +7,9 @@
 #include <boost/log/utility/setup/from_stream.hpp>
 #include <sol/sol.hpp>
 
-#include <kr/log/logging.h>
-
 int main(int argc, char *argv[])
 {
+    str_cmp_test_unit();
     boost::program_options::options_description desc("Alloed options");
     desc.add_options()
         ("help", "help message.")
@@ -36,13 +35,11 @@ int main(int argc, char *argv[])
         return EXIT_FAILURE;
     }
 
+    // 日志配置
     if (std::optional<std::string> log_conf = config["log_conf"]; log_conf)
     {
         std::ifstream settings(*log_conf);
         boost::log::init_from_stream(settings);
     }
-
-    kr::log::logger_mt logger("server");
-    KRLOG_DEBUG(logger, "main") << "logger init.";
     return EXIT_SUCCESS;
 }
