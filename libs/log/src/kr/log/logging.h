@@ -47,7 +47,8 @@ inline std::basic_istream<CharT, TraitsT>& operator >> (
 
 
 // 非线程安全日志器
-class logger : public boost::log::sources::severity_channel_logger<severity_level, std::string> {
+class logger : public boost::log::sources::severity_channel_logger<severity_level, std::string>
+{
 public:
     /**
      * 构造函数
@@ -71,7 +72,8 @@ public:
 };
 
 // 线程安全日志器
-class logger_mt : public boost::log::sources::severity_channel_logger_mt<severity_level, std::string> {
+class logger_mt : public boost::log::sources::severity_channel_logger_mt<severity_level, std::string>
+{
 public:
     /**
      * 构造函数

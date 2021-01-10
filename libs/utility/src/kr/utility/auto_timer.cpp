@@ -9,11 +9,14 @@
 namespace kr {
 namespace utility {
 
-void logger::operator()(std::string_view msg, const std::chrono::duration<double> &sec) const {
-    if (msg.empty()) {
+void logger::operator()(std::string_view msg, const std::chrono::duration<double> &sec) const
+{
+    if (msg.empty())
+    {
         return ;
     }
     std::cout << "msg: " << msg << "in " << sec.count() << " seconds" << std::endl;
 }
+
 } // utility
 } // kr

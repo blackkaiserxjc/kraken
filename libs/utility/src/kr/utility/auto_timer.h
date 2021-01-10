@@ -72,7 +72,8 @@ private:
 };
 
 // 默认日志器
-struct logger final {
+struct logger final
+{
     /**
      * 重载括号
      * @param msg  日志信息
@@ -92,7 +93,8 @@ template<
 auto make_auto_timer(std::string &&msg = "",
                      const std::chrono::duration<double> &min_time_to_log =
                         std::chrono::duration<double>::zero(),
-                     Logger &&logger = Logger()) {
+                     Logger &&logger = Logger())
+{
     return basic_auto_timer<Logger, Clock>(std::move(msg), min_time_to_log, std::move(logger));
 }
 

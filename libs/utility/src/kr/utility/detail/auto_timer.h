@@ -29,19 +29,22 @@ basic_auto_timer<Logger, Clock>::~basic_auto_timer() {
 }
 
 template <class Logger, class Clock>
-auto basic_auto_timer<Logger, Clock>::log(std::string_view msg) {
+auto basic_auto_timer<Logger, Clock>::log(std::string_view msg)
+{
     return log_impl(Clock::now(), msg);
 }
 
 template <class Logger, class Clock>
 template <class Format, class... Args>
-auto basic_auto_timer<Logger, Clock>::log_format(Format &&format, Args&&... args) {
+auto basic_auto_timer<Logger, Clock>::log_format(Format &&format, Args&&... args)
+{
     auto now = Clock::now();
     return log_impl(now, fmt::format(std::forward<Format>(format), std::forward<Args>(args)...));
 }
 
 template <class Logger, class Clock>
-auto basic_auto_timer<Logger, Clock>::log_impl(std::chrono::time_point<Clock> now, std::string_view msg) {
+auto basic_auto_timer<Logger, Clock>::log_impl(std::chrono::time_point<Clock> now, std::string_view msg)
+{
     auto duration = now - start_;
     if (duration >= min_time_to_log_) {
         logger_(msg, duration);
@@ -49,6 +52,7 @@ auto basic_auto_timer<Logger, Clock>::log_impl(std::chrono::time_point<Clock> no
     start_ = Clock::now();
     return duration;
 }
+
 } // utility
 } // kr
 

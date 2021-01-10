@@ -13,12 +13,14 @@
 namespace kr {
 namespace log {
 
-namespace {
-constexpr std::size_t names_count = 6;
+namespace
+{
+    constexpr std::size_t names_count = 6;
 }// namespace
 
 template<typename CharT, typename TraitsT>
-std::basic_string<CharT, TraitsT> to_string(severity_level level) {
+std::basic_string<CharT, TraitsT> to_string(severity_level level)
+{
     static std::array<std::string, names_count> level_names = {"TRACE", "DEBUG", "INFO", "WARN", "ERROR", "FATAL"};
     if (static_cast<std::size_t>(level) < names_count) {
         return level_names[static_cast<std::size_t>(level)];
@@ -27,7 +29,8 @@ std::basic_string<CharT, TraitsT> to_string(severity_level level) {
 }
 
 template<typename CharT, typename TraitsT>
-bool from_string(const std::basic_string<CharT, TraitsT> &str, severity_level &level) {
+bool from_string(const std::basic_string<CharT, TraitsT> &str, severity_level &level)
+{
     static std::array<std::string, names_count> level_names = {"TRACE", "DEBUG", "INFO", "WARN", "ERROR", "FATAL"};
     auto iter = std::find_if(level_names.begin(), level_names.end(), [&](auto &&value) {
         return std::equal(str.begin(), str.end(), value.begin(), value.end());
@@ -41,13 +44,15 @@ bool from_string(const std::basic_string<CharT, TraitsT> &str, severity_level &l
 }
 
 template <typename CharT, typename TraitsT>
-std::basic_ostream<CharT, TraitsT>& operator << (std::basic_ostream<CharT, TraitsT>& strm, severity_level level) {
+std::basic_ostream<CharT, TraitsT>& operator << (std::basic_ostream<CharT, TraitsT>& strm, severity_level level)
+{
     strm << to_string<CharT, TraitsT>(level);
     return strm;
 }
 
 template <typename CharT, typename TraitsT>
-std::basic_istream<CharT, TraitsT>& operator >> (std::basic_istream<CharT, TraitsT>& strm, severity_level& level) {
+std::basic_istream<CharT, TraitsT>& operator >> (std::basic_istream<CharT, TraitsT>& strm, severity_level& level)
+{
     using string_type = std::basic_string<CharT, TraitsT>;
     string_type str;
     strm >> str;
@@ -56,7 +61,8 @@ std::basic_istream<CharT, TraitsT>& operator >> (std::basic_istream<CharT, Trait
 }
 
 template <typename ValueType>
-ValueType logger::set_attr_value(const char* name, ValueType value) {
+ValueType logger::set_attr_value(const char* name, ValueType value)
+{
     using value_type = boost::log::attributes::mutable_constant<ValueType>;
     auto attr = boost::log::attribute_cast<value_type>(get_attributes()[name]);
     attr.set(value);
@@ -64,7 +70,8 @@ ValueType logger::set_attr_value(const char* name, ValueType value) {
 }
 
 template <typename ValueType>
-ValueType logger_mt::set_attr_value(const char* name, ValueType value) {
+ValueType logger_mt::set_attr_value(const char* name, ValueType value)
+{
     using value_type = boost::log::attributes::mutable_constant<ValueType>;
     auto attr = boost::log::attribute_cast<value_type>(this->get_attributes()[name]);
     attr.set(value);
