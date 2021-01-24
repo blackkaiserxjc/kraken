@@ -9,8 +9,7 @@
 
 int main(int argc, char *argv[])
 {
-    str_cmp_test_unit();
-    boost::program_options::options_description desc("Alloed options");
+    boost::program_options::options_description desc("Allowed options");
     desc.add_options()
         ("help", "help message.")
         ("config", boost::program_options::value<std::string>()->default_value("etc/server.app.lua"), "server config file path");

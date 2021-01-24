@@ -32,10 +32,12 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake/modules")
 
 # 核心库
+include(libs/cli/module.cmake)
 include(libs/core/module.cmake)
 include(libs/log/module.cmake)
 include(libs/utility/module.cmake)
 
+add_subdirectory(libs/cli)
 add_subdirectory(libs/core)
 add_subdirectory(libs/log)
 add_subdirectory(libs/utility)
