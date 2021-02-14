@@ -23,7 +23,7 @@ else()
 endif()
 
 # clang-tidy检测
-set(CMAKE_CXX_CLANG_TIDY "clang-tidy;-checks=google-*,cppcoreguidelines-*,modernize-*")
+#set(CMAKE_CXX_CLANG_TIDY "clang-tidy;-checks=google-*,cppcoreguidelines-*,modernize-*")
 
 # 静态库
 option(CMAKE_Cxx_CREATE_STATIC_LIBRARY "Build static library" ON)

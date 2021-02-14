@@ -3,7 +3,7 @@
 //
 
 #ifndef KR_COMMON_UTILITY_HASH_H_
-#define KR_COMMON_UTILITY_HASH_H
+#define KR_COMMON_UTILITY_HASH_H_
 
 #include <cstddef>
 #include <cstdint>
@@ -19,12 +19,14 @@ namespace utility {
  * @param sv 字符串
  * @return   哈希值
  */
-inline constexpr std::uint32_t hash_str(std::string_view sv)
+inline std::uint32_t hash_str(std::string_view sv)
 {
     boost::crc_32_type result;
     result.process_bytes(sv.data(), sv.length());
     return result.checksum();
 }
+
+
 
 } // utility
 } // kr

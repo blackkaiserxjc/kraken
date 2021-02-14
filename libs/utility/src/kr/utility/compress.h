@@ -9,4 +9,17 @@
 #pragma once
 #endif
 
+namespace kr {
+namespace utility {
+
+template <typename T>
+class basic_compressor
+{
+public: 
+    
+};
+
+}
+}// namespace kr
+
 #endif//KRAKEN_COMPRESS_H

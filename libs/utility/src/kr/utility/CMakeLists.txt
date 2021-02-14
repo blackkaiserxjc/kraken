@@ -7,6 +7,9 @@ include_directories(${FMT_INCLUDE_DIRS})
 set(kr_common_utility_SRCS
     auto_timer.h
     auto_timer.cpp
+    hash.h
+    murmurhash.h
+    murmurhash.cpp
 )
 
 set(kr_common_utility_detail_SRCS

@@ -6,5 +6,6 @@
 #define KRAKEN_CORE_H
 
 #include "config.h"
+#include "lang.h"
 
 #endif//KRAKEN_CORE_H
