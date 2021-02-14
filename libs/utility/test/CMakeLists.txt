@@ -10,13 +10,14 @@ set(kr_common_utility_test_SRCS
     auto_timer_unittest.cpp
     di_unittest.cpp
     hash_unittest.cpp
+    random_unittest.cpp
     unittest_main.cpp
 )
 
 add_executable(kr_common_utility_test ${kr_common_utility_test_SRCS})
 target_link_libraries(kr_common_utility_test
-    kr_common_utility
     kr_common_core
+    kr_common_utility
     ${FMT_LIBRARIES}
     ${Boost_FILESYSTEM_LIBRARY}
     ${Boost_SYSTEM_LIBRARY}

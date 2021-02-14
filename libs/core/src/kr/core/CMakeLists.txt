@@ -9,6 +9,7 @@ set(kr_common_core_SRCS
     core.cpp
     core.h
     lang.h
+    likely.h
 )
 
 add_library(kr_common_core ${kr_common_core_SRCS})
