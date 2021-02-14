@@ -3,7 +3,6 @@
 #include <map>
 
 #include <boost/test/unit_test.hpp>
-#include <fmt/format.h>
 
 #include <kr/utility/random.h>
 
