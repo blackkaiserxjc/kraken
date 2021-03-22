@@ -11,6 +11,7 @@ set(kr_common_utility_test_SRCS
     di_unittest.cpp
     hash_unittest.cpp
     random_unittest.cpp
+    string_unittest.cpp
     unittest_main.cpp
 )
 

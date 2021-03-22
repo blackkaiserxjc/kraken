@@ -104,3 +104,4 @@ private:
 
 
 #endif//KR_COMMON_UTILITY_RANDOM_H_
+

@@ -7,5 +7,6 @@
 
 #include "config.h"
 #include "lang.h"
+#include "likely.h"
 
 #endif//KRAKEN_CORE_H

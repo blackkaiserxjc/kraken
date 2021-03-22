@@ -4,6 +4,8 @@
 
 #include <iostream>
 
+#include <kr/utility/string.h>
+
 #include "auto_timer.h"
 
 namespace kr {
@@ -15,7 +17,7 @@ void logger::operator()(std::string_view msg, const std::chrono::duration<double
     {
         return ;
     }
-    std::cout << "msg: " << msg << "in " << sec.count() << " seconds" << std::endl;
+    std::cout << "msg: " << msg << " in " << pretty_print(sec.count(), PrettyType::PRETTY_TIME, false) << std::endl;
 }
 
 } // utility

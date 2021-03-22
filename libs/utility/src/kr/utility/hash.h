@@ -26,8 +26,6 @@ inline std::uint32_t hash_str(std::string_view sv)
     return result.checksum();
 }
 
-
-
 } // utility
 } // kr
 

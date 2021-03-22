@@ -39,10 +39,12 @@ include(libs/cli/module.cmake)
 include(libs/core/module.cmake)
 include(libs/log/module.cmake)
 include(libs/utility/module.cmake)
+include(libs/protobuf/module.cmake)
 
 add_subdirectory(libs/cli)
 add_subdirectory(libs/core)
 add_subdirectory(libs/log)
+add_subdirectory(libs/protobuf)
 add_subdirectory(libs/utility)
 
 # 服务

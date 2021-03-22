@@ -6,8 +6,7 @@ BOOST_AUTO_TEST_SUITE(AutoTimer)
 BOOST_AUTO_TEST_CASE(basic_test)
 {
     auto timer = kr::utility::make_auto_timer("auto timer");
-    timer.log("first log message.");
-    timer.log("second log message");
+    timer.log("io test begin.");
     timer.log_format("{} log message", "third");
 }
 
