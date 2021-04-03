@@ -14,6 +14,8 @@
 
 #include <kr/log/logging.h>
 
+using namespace kr::log;
+
 BOOST_AUTO_TEST_SUITE(Logging)
 
     struct LogSinkFixture

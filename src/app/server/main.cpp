@@ -7,6 +7,9 @@
 #include <boost/log/utility/setup/from_stream.hpp>
 #include <sol/sol.hpp>
 
+#include <kr/log/logging.h>
+#include <kr/utility/auto_timer.h>
+
 int main(int argc, char *argv[])
 {
     boost::program_options::options_description desc("Allowed options");
@@ -40,5 +43,6 @@ int main(int argc, char *argv[])
         std::ifstream settings(*log_conf);
         boost::log::init_from_stream(settings);
     }
+
     return EXIT_SUCCESS;
 }

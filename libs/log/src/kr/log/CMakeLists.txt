@@ -3,8 +3,8 @@ find_package(Boost REQUIRED )
 include_directories(${Boost_INCLUDE_DIRS})
 
 set(kr_common_log_SRCS
-        logging.h
-        logging.cpp
+    logging.h
+    logging.cpp
 )
 
 set(kr_common_log_detail_SRCS

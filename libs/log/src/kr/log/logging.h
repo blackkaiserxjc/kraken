@@ -95,10 +95,6 @@ public:
     static logger_mt &get();
 };
 
-} // logging
-} // kr
-
-
 /** 日志宏实现 */
 #define KRLOG_SEV_IMPL(logger, level, file, line, tag) \
     BOOST_LOG_STREAM_WITH_PARAMS((logger), \
@@ -128,6 +124,9 @@ public:
 
 /** 严重错误日志宏 **/
 #define KRLOG_FATAL(logger, tag) KRLOG_SEV(logger, kr::log::severity_level::FATAL, tag)
+
+} // logging
+} // kr
 
 #include <kr/log/detail/logging.h>
 #endif //KR_COMMON_LOG_LOGGING_H_

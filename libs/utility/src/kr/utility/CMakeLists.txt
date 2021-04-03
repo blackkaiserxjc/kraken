@@ -21,5 +21,11 @@ set(kr_common_utility_detail_SRCS
     detail/string.h
 )
 
-add_library(kr_common_utility ${kr_common_utility_SRCS} ${kr_common_utility_detail_SRCS})
+add_library(kr_common_utility
+    ${kr_common_utility_SRCS}
+    ${kr_common_utility_detail_SRCS}
+)
+target_link_libraries(kr_common_utility
+    kr_common_log
+)
 set_target_properties(kr_common_utility PROPERTIES FOLDER CommonTargets/Utility)

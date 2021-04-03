@@ -11,13 +11,17 @@
 namespace kr {
 namespace utility {
 
+logger::logger(): logger_("TimeProfiler")
+{
+}
+
 void logger::operator()(std::string_view msg, const std::chrono::duration<double> &sec) const
 {
     if (msg.empty())
     {
-        return ;
+        return;
     }
-    std::cout << "msg: " << msg << " in " << pretty_print(sec.count(), PrettyType::PRETTY_TIME, false) << std::endl;
+    KRLOG_DEBUG(logger_, "TimeProfiler") << "msg: " << msg << " in " << pretty_print(sec.count(), PrettyType::PRETTY_TIME, false);
 }
 
 } // utility

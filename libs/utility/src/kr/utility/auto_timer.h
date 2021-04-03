@@ -11,6 +11,8 @@
 #include <string_view>
 #include <type_traits>
 
+#include <kr/log/logging.h>
+
 namespace kr {
 namespace utility {
 
@@ -75,11 +77,18 @@ private:
 struct logger final
 {
     /**
+     * 构造函数
+     */
+    logger();
+    /**
      * 重载括号
      * @param msg  日志信息
      * @param sec  时间间隔
      */
     void operator()(std::string_view msg, const std::chrono::duration<double>& sec) const;
+
+    // 日志器
+    mutable kr::log::logger_mt logger_;
 };
 
 // 外部使用类型
