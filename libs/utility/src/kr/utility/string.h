@@ -5,10 +5,35 @@
 #ifndef KR_COMMON_UTILITY_HASH_H_
 #define KR_COMMON_UTILITY_HASH_H_
 
+#include <cstdint>
 #include <string>
+#include <string_view>
 
-namespace kr{
-namespace utility{
+namespace kr {
+namespace utility {
+
+enum class UriEscapeMode : std::uint8_t
+{
+    ALL = 0,
+    QUERY = 1,
+    PATH = 2
+};
+
+/**
+ * uri编码
+ * @param str  uri原串
+ * @param mode 模式
+ * @return uri编码串
+ */
+std::string uri_escape(std::string_view str, UriEscapeMode mode = UriEscapeMode::ALL);
+
+/**
+ * uri解码
+ * @param str uri原串
+ * @param mode 模式
+ * @return uri解码串 
+ */
+std::string uri_unescape(std::string_view str, UriEscapeMode mode = UriEscapeMode::ALL);
 
 /**
  * A pretty-printer for numbers that appends suffixes of units of the
@@ -52,18 +77,18 @@ enum PrettyType
 
 std::string pretty_print(double val, PrettyType type, bool add_space = true);
 
-template<class OutIter>
-void hex_dump(const void* ptr, std::size_t size, OutIter out);
+template <class OutIter>
+void hex_dump(const void *ptr, std::size_t size, OutIter out);
 
 /**
  * @param ptr 数据指针
  * @param size
  * @return hex dump
  */
-std::string hex_dump(const void* ptr, std::size_t size);
+std::string hex_dump(const void *ptr, std::size_t size);
 
-}// namespace utility
-}// namespace kr
+} // namespace utility
+} // namespace kr
 
 #include "detail/string.h"
 

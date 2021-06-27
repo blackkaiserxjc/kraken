@@ -1,17 +1,15 @@
-find_package(Boost REQUIRED atomic date_time regex system thread filesystem  log_setup log program_options unit_test_framework)
-find_package(Di REQUIRED)
+find_package(Boost REQUIRED atomic date_time regex system thread filesystem log_setup log unit_test_framework)
 find_package(Fmt REQUIRED)
 
 include_directories(${Boost_INCLUDE_DIRS})
-include_directories(${BOOST_DI_INCLUDE_DIRS})
 include_directories(${FMT_INCLUDE_DIRS})
 
 set(kr_common_utility_test_SRCS
     auto_timer_unittest.cpp
-    di_unittest.cpp
     hash_unittest.cpp
     random_unittest.cpp
     string_unittest.cpp
+    uri_unittest.cpp
     unittest_main.cpp
 )
 

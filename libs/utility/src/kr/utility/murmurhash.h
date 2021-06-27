@@ -21,16 +21,16 @@ std::uint32_t MurmurHashNeutral2(const void *key, int len, std::uint32_t seed);
 
 namespace kr {
 namespace utility {
-    
-struct murmur_hash 
+
+struct murmur_hash
 {
-    std::size_t operator()(std::string_view slice) const 
+    std::size_t operator()(std::string_view slice) const
     {
         return MurmurHash(slice.data(), static_cast<int>(slice.size()), 0);
     }
 };
 
-}// namespace utility
-}// namespace kr
+} // namespace utility
+} // namespace kr
 
 #endif

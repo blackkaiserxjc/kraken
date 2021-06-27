@@ -26,7 +26,7 @@ inline std::uint32_t hash_str(std::string_view sv)
     return result.checksum();
 }
 
-} // utility
-} // kr
+} // namespace utility
+} // namespace kr
 
 #endif //KR_COMMON_UTILITY_HASH_H

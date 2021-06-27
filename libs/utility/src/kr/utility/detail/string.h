@@ -4,10 +4,10 @@
 namespace kr {
 namespace utility {
 namespace detail {
-    std::size_t hex_dump_line(const void *ptr, std::size_t offset, std::size_t size, std::string &line);
-}// namespace detail
+std::size_t hex_dump_line(const void *ptr, std::size_t offset, std::size_t size, std::string &line);
+} // namespace detail
 
-template<class OutIter>
+template <class OutIter>
 void hex_dump(const void *ptr, std::size_t size, OutIter out)
 {
     std::size_t offset = 0;
@@ -18,5 +18,5 @@ void hex_dump(const void *ptr, std::size_t size, OutIter out)
         *out++ = line;
     }
 }
-}// namespace utility
-}// namespace kr
+} // namespace utility
+} // namespace kr

@@ -1,6 +1,6 @@
 #include <algorithm>
-#include <vector>
 #include <map>
+#include <vector>
 
 #include <boost/test/unit_test.hpp>
 
@@ -8,11 +8,11 @@
 
 BOOST_AUTO_TEST_SUITE(RandomTest)
 
-BOOST_AUTO_TEST_CASE(rand_int_test)
+BOOST_AUTO_TEST_CASE(RandInt)
 {
     using kr::utility::random;
     const int average = 20;
-    for(std::uint32_t seed : {0, 1, 2, 37, 4096})
+    for (std::uint32_t seed : {0, 1, 2, 37, 4096})
     {
         random r{seed};
         for (auto range : {1, 2, 8, 12, 100})
@@ -33,19 +33,18 @@ BOOST_AUTO_TEST_CASE(rand_int_test)
     }
 }
 
-BOOST_AUTO_TEST_CASE(uniform_test)
+BOOST_AUTO_TEST_CASE(Uniform)
 {
     using kr::utility::random;
     std::map<float, float> ranges = {
         {0.0, 1.2},
         {3.0, 100.1},
         {-42, 42},
-        {-110.0, 0.0}
-    };
+        {-110.0, 0.0}};
     for (std::uint32_t seed : {0, 1, 2, 37, 4096})
     {
         random r{seed};
-        for(auto[min, max] : ranges)
+        for (auto [min, max] : ranges)
         {
             auto value = r.uniform(min, max);
             BOOST_CHECK_GE(value, min);

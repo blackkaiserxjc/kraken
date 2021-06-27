@@ -99,9 +99,7 @@ private:
     std::mt19937_64 generator_;
 };
 
-}
-}
+} // namespace utility
+} // namespace kr
 
-
-#endif//KR_COMMON_UTILITY_RANDOM_H_
-
+#endif //KR_COMMON_UTILITY_RANDOM_H_

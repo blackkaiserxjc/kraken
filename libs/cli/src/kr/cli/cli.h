@@ -9,20 +9,18 @@
 #pragma once
 #endif
 
-namespace kr{
-namespace cli{
+namespace kr {
+namespace cli {
 
 class cli
 {
-
 };
 
 class scheduler
 {
-
 };
 
-}
-}
+} // namespace cli
+} // namespace kr
 
-#endif//KR_COMMON_CLI_H_
+#endif //KR_COMMON_CLI_H_

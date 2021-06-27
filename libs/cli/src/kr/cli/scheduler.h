@@ -7,8 +7,9 @@
 
 namespace kr {
 namespace cli {
-    class scheduler {
-    };
-}
-}
-#endif//KRAKEN_SCHEDULER_H
+class scheduler
+{
+};
+} // namespace cli
+} // namespace kr
+#endif //KRAKEN_SCHEDULER_H

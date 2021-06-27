@@ -11,7 +11,8 @@
 namespace kr {
 namespace utility {
 
-logger::logger(): logger_("TimeProfiler")
+logger::logger()
+    : logger_("AutoTimer")
 {
 }
 
@@ -21,8 +22,8 @@ void logger::operator()(std::string_view msg, const std::chrono::duration<double
     {
         return;
     }
-    KRLOG_DEBUG(logger_, "TimeProfiler") << "msg: " << msg << " in " << pretty_print(sec.count(), PrettyType::PRETTY_TIME, false);
+    KRLOG_DEBUG(logger_, "Profile") << "msg: " << msg << " in " << pretty_print(sec.count(), PrettyType::PRETTY_TIME, false);
 }
 
-} // utility
-} // kr
+} // namespace utility
+} // namespace kr

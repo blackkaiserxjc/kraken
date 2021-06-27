@@ -9,4 +9,4 @@
 #include "lang.h"
 #include "likely.h"
 
-#endif//KRAKEN_CORE_H
+#endif //KRAKEN_CORE_H

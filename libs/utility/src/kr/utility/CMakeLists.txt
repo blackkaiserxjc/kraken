@@ -14,6 +14,8 @@ set(kr_common_utility_SRCS
     random.cpp
     string.h
     string.cpp
+    uri.h
+    uri.cpp
 )
 
 set(kr_common_utility_detail_SRCS

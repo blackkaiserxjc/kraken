@@ -2,8 +2,8 @@
 // Created by kaiser on 2021/1/2.
 //
 
-#include <thread>
 #include <mutex>
+#include <thread>
 
 #include <boost/log/utility/setup/filter_parser.hpp>
 #include <boost/log/utility/setup/formatter_parser.hpp>
@@ -23,8 +23,7 @@ struct init_attributes
     void init()
     {
         static std::once_flag flag;
-        std::call_once(flag, []()
-        {
+        std::call_once(flag, []() {
             boost::log::register_simple_filter_factory<severity_level>("Severity");
             boost::log::register_simple_formatter_factory<severity_level, char>("Severity");
             boost::log::add_common_attributes();
@@ -41,13 +40,13 @@ logger::logger(const std::string &channel)
     init_attributes.init();
 }
 
-logger& logger::get()
+logger &logger::get()
 {
     static logger glog{"global"};
     return glog;
 }
 
-logger_mt::logger_mt(const std::string& channel)
+logger_mt::logger_mt(const std::string &channel)
     : boost::log::sources::severity_channel_logger_mt<severity_level, std::string>(boost::log::keywords::channel = channel)
 {
     this->add_attribute("File", boost::log::attributes::mutable_constant<std::string>(""));
@@ -56,11 +55,11 @@ logger_mt::logger_mt(const std::string& channel)
     init_attributes.init();
 }
 
-logger_mt& logger_mt::get()
+logger_mt &logger_mt::get()
 {
     static logger_mt glog{"global"};
     return glog;
 }
 
-}// log
-}// kr
+} // namespace log
+} // namespace kr

@@ -13,7 +13,7 @@
 namespace kr {
 namespace protobuf {
 
-inline bool StripSuffix(std::string* filename, const std::string& suffix)
+inline bool StripSuffix(std::string *filename, const std::string &suffix)
 {
     if (filename->length() >= suffix.length())
     {
@@ -27,7 +27,7 @@ inline bool StripSuffix(std::string* filename, const std::string& suffix)
     return false;
 }
 
-inline bool StripPrefix(std::string* filename, const std::string& prefix)
+inline bool StripPrefix(std::string *filename, const std::string &prefix)
 {
     if (filename->length() >= prefix.length() && filename->substr(0, prefix.size()) == prefix)
     {
@@ -36,7 +36,7 @@ inline bool StripPrefix(std::string* filename, const std::string& prefix)
     return false;
 }
 
-inline std::string StringReplace(std::string str, const std::string& from, const std::string& to, bool replace_all)
+inline std::string StringReplace(std::string str, const std::string &from, const std::string &to, bool replace_all)
 {
     if (!replace_all)
     {
@@ -49,19 +49,19 @@ inline std::string StringReplace(std::string str, const std::string& from, const
     return str;
 }
 
-inline std::string StringReplace(std::string str, const std::string& from, const std::string& to)
+inline std::string StringReplace(std::string str, const std::string &from, const std::string &to)
 {
     return StringReplace(str, from, to, true);
 }
 
-inline std::vector<std::string> Split(const std::string& input, const std::string& delimiters)
+inline std::vector<std::string> Split(const std::string &input, const std::string &delimiters)
 {
     std::vector<std::string> tokens;
     boost::algorithm::split(tokens, input, boost::is_any_of(delimiters));
     return tokens;
 }
 
-}
-}
+} // namespace protobuf
+} // namespace kr
 
 #endf

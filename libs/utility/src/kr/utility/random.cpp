@@ -8,7 +8,7 @@ namespace kr {
 namespace utility {
 
 random::random(std::uint32_t seed)
-    :generator_{seed}
+    : generator_{seed}
 {
 }
 
@@ -17,7 +17,7 @@ void random::seed(std::uint32_t new_seed)
     generator_.seed(new_seed);
 }
 
-std::uint32_t random::next() 
+std::uint32_t random::next()
 {
     return static_cast<std::uint32_t>(generator_());
 }
@@ -33,7 +33,7 @@ float random::uniform(float min, float max)
 }
 
 random64::random64(std::uint64_t seed)
-    :generator_{seed}
+    : generator_{seed}
 {
 }
 
@@ -57,5 +57,5 @@ double random64::uniform(double min, double max)
     return static_cast<double>(std::uniform_real_distribution<>(min, max)(generator_));
 }
 
-}
-}
+} // namespace utility
+} // namespace kr

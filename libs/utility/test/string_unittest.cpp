@@ -1,21 +1,45 @@
-#include <string>
 #include <boost/test/unit_test.hpp>
+#include <string>
 
 #include <kr/utility/string.h>
 using namespace kr::utility;
 
 BOOST_AUTO_TEST_SUITE(String)
+BOOST_AUTO_TEST_SUITE(Escape)
+BOOST_AUTO_TEST_CASE(UriEscape)
+{
+    BOOST_CHECK_EQUAL("hello%2c%20%2fworld", uri_escape("hello, /world"));
+    BOOST_CHECK_EQUAL("hello%2c%20/world", uri_escape("hello, /world", UriEscapeMode::PATH));
+    BOOST_CHECK_EQUAL("hello%2c+%2fworld", uri_escape("hello, /world", UriEscapeMode::QUERY));
+    BOOST_CHECK_EQUAL(
+        "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_.~",
+        uri_escape(
+            "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_.~"));
+}
+
+BOOST_AUTO_TEST_CASE(UriUnescape)
+{
+    BOOST_CHECK_EQUAL("hello, /world", uri_unescape("hello, /world"));
+    BOOST_CHECK_EQUAL("hello, /world", uri_unescape("hello%2c%20%2fworld"));
+    BOOST_CHECK_EQUAL("hello,+/world", uri_unescape("hello%2c+%2fworld"));
+    BOOST_CHECK_EQUAL(
+        "hello, /world",
+        uri_unescape("hello%2c+%2fworld", UriEscapeMode::QUERY));
+    BOOST_CHECK_EQUAL("hello/", uri_unescape("hello%2f"));
+    BOOST_CHECK_EQUAL("hello/", uri_unescape("hello%2F"));
+}
+BOOST_AUTO_TEST_SUITE_END()
+
 BOOST_AUTO_TEST_SUITE(PrettyPrint)
 
 struct PrettyTestCase
 {
     std::string pretty_string;
-    double  real_value;
+    double real_value;
     PrettyType pretty_type;
 };
 
-PrettyTestCase pretty_test_cases[] =
-{
+PrettyTestCase pretty_test_cases[] = {
     {std::string("853 ms"), 85.3e-2, PRETTY_TIME_HMS},
     {std::string("8.53 s "), 85.3e-1, PRETTY_TIME_HMS},
     {std::string("1.422 m "), 85.3, PRETTY_TIME_HMS},
@@ -38,9 +62,9 @@ BOOST_AUTO_TEST_CASE(Basic)
 {
     for (auto index = 0; pretty_test_cases[index].pretty_type != PRETTY_NUM_TYPES; ++index)
     {
-        auto&& pretty_test_case = pretty_test_cases[index];
+        auto &&pretty_test_case = pretty_test_cases[index];
         BOOST_CHECK_EQUAL(pretty_test_case.pretty_string,
-                          pretty_print(pretty_test_case.real_value, pretty_test_case.pretty_type));
+            pretty_print(pretty_test_case.real_value, pretty_test_case.pretty_type));
     }
 }
 
@@ -54,12 +78,11 @@ BOOST_AUTO_TEST_CASE(HexDump)
 
     a = "abcdefghijklmnopqrstuvwxyz";
     BOOST_CHECK_EQUAL(
-            "00000000  61 62 63 64 65 66 67 68  69 6a 6b 6c 6d 6e 6f 70  "
-            "|abcdefghijklmnop|\n"
-            "00000010  71 72 73 74 75 76 77 78  79 7a                    "
-            "|qrstuvwxyz      |\n",
-            hex_dump(a.data(), a.size()));
+        "00000000  61 62 63 64 65 66 67 68  69 6a 6b 6c 6d 6e 6f 70  "
+        "|abcdefghijklmnop|\n"
+        "00000010  71 72 73 74 75 76 77 78  79 7a                    "
+        "|qrstuvwxyz      |\n",
+        hex_dump(a.data(), a.size()));
 }
-
 BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE_END()
