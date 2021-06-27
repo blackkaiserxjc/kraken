@@ -63,9 +63,6 @@ constexpr auto make_array_with(MakeItem const &make)
     return make_array_helper(make, std::make_index_sequence<Size>{});
 }
 
-//extern const std::array<unsigned char, 256> hex_table;
-//extern const std::array<unsigned char, 256> uri_escape_table;
-
 static constexpr std::array<unsigned char, 256> hex_table =
     make_array_with<256>(string_table_hex_make_item{});
 
