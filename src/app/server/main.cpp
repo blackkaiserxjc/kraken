@@ -15,12 +15,12 @@
 #include <boost/core/ignore_unused.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/log/utility/setup/from_stream.hpp>
-#include <boost/network/uri.hpp>
 #include <boost/program_options.hpp>
 #include <sol/sol.hpp>
 
 #include <kr/log/logging.h>
 #include <kr/utility/string.h>
+#include <kr/utility/uri.h>
 
 int main(int argc, char *argv[])
 {
@@ -59,15 +59,18 @@ int main(int argc, char *argv[])
     auto thread_count = config["thread"].get<int>();
 
     // 地址解析
-    auto to_endpoint = [](const std::string &address) {
-        boost::network::uri::uri uri(address);
+    auto to_endpoint = [](std::string_view address) {
+        kr::utility::uri uri(address);
         return boost::asio::ip::tcp::endpoint(boost::asio::ip::address::from_string(uri.host()),
             boost::lexical_cast<std::uint16_t>(uri.port()));
     };
 
+    std::string a("abc\x00\x02\xa0", 6);
+
     // 主线程logger
     kr::log::logger logger{"Service"};
     KRLOG_INFO(logger, "Main") << "Service Start.";
+    KRLOG_INFO(logger, "Main") << kr::utility::hex_dump(a.data(), a.size());
     // 调度器
     boost::asio::io_context io_context;
 
