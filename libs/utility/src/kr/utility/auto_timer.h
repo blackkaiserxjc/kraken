@@ -53,8 +53,8 @@ public:
      * @param args   变参数集
      * @return       间隔时间
      */
-    template <class Format, class... Args>
-    auto log_format(Format &&format, Args &&...args);
+    template <class... Args>
+    auto log_format(std::string_view fmt, Args &&...args);
 
 private:
     // 日志实现

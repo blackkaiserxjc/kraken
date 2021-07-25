@@ -37,11 +37,11 @@ auto basic_auto_timer<Logger, Clock>::log(std::string_view msg)
 }
 
 template <class Logger, class Clock>
-template <class Format, class... Args>
-auto basic_auto_timer<Logger, Clock>::log_format(Format &&format, Args &&...args)
+template <class... Args>
+auto basic_auto_timer<Logger, Clock>::log_format(std::string_view fmt, Args &&...args)
 {
     auto now = Clock::now();
-    return log_impl(now, fmt::format(std::forward<Format>(format), std::forward<Args>(args)...));
+    return log_impl(now, fmt::format(fmt, std::forward<Args>(args)...));
 }
 
 template <class Logger, class Clock>
