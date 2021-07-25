@@ -18,7 +18,7 @@ BOOST_AUTO_TEST_CASE(Basic)
     BOOST_CHECK_EQUAL(uri.path(), "/Home/Index.htm");
     BOOST_CHECK_EQUAL(uri.fragment(), "FragmentName");
     BOOST_CHECK_EQUAL(uri.query(), "q1=v1&q2=v2");
-    BOOST_CHECK_EQUAL(uri.str(), str);
+    BOOST_CHECK_EQUAL(uri.to_string(), str);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

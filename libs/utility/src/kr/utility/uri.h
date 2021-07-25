@@ -5,6 +5,10 @@
 #ifndef KR_COMMON_UTILITY_URI_H_
 #define KR_COMMON_UTILITY_URI_H_
 
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include <cctype>
 #include <string>
 #include <string_view>
@@ -13,8 +17,26 @@
 
 namespace kr {
 namespace utility {
+
 /** uri解析类 
- * 
+ * The class for URI scheme : http://en.wikipedia.org/wiki/URI_scheme
+ *
+ *  foo://username:password@example.com:8042/over/there/index.dtb?type=animal&name=narwhal#nose
+ *  \_/   \_______________/ \_________/ \__/            \___/ \_/ \______________________/ \__/
+ *   |           |               |       |                |    |            |                |
+ *   |       userinfo           host    port              |    |          query          fragment
+ *   |    \________________________________/\_____________|____|/ \__/        \__/
+ * scheme                 |                          |    |    |    |          |
+ *                    authority                      |    |    |    |          |
+ *                                                 path   |    |    interpretable as keys
+ *                                                        |    |
+ *        \_______________________________________________|____|/       \____/     \_____/
+ *                             |                          |    |          |           |
+ *                     hierarchical part                  |    |    interpretable as values
+ *                                                        |    |
+ *                                   interpretable as filename |
+ *                                                             |
+ *                                                             |
  * 示例 https://user:password@www.contoso.com:80/Home/Index.htm?q1=v1&q2=v2#FragmentName
  * 
  * scheme: http
@@ -39,7 +61,7 @@ public:
      * 获取scheme
      * @return scheme 
      */
-    const std::string &scheme() const
+    std::string_view scheme() const
     {
         return scheme_;
     }
@@ -48,7 +70,7 @@ public:
      * 获取username
      * @return username 
      */
-    const std::string &username() const
+    std::string_view username() const
     {
         return username_;
     }
@@ -57,7 +79,7 @@ public:
      * 获取password
      * @return password
      */
-    const std::string &password() const
+    std::string_view password() const
     {
         return password_;
     }
@@ -66,7 +88,7 @@ public:
      * 获取host
      * @return host
      */
-    const std::string &host() const
+    std::string_view host() const
     {
         return host_;
     }
@@ -84,7 +106,7 @@ public:
      * 获取path
      * @return path
      */
-    const std::string &path() const
+    std::string_view path() const
     {
         return path_;
     }
@@ -93,7 +115,7 @@ public:
      * 获取query
      * @return query
      */
-    const std::string &query() const
+    std::string_view query() const
     {
         return query_;
     }
@@ -102,7 +124,7 @@ public:
      * 获取fragment
      * @return fragment
      */
-    const std::string &fragment() const
+    std::string_view fragment() const
     {
         return fragment_;
     }
@@ -123,7 +145,7 @@ public:
      * 转换为字符串
      * @return uri string 
      */
-    std::string str() const;
+    std::string to_string() const;
 
     /**
      *  设置端口号
@@ -142,6 +164,8 @@ public:
     const std::vector<std::pair<std::string, std::string>> &query_params();
 
 private:
+    friend class uri_builder;
+
     std::string scheme_;
     std::string username_;
     std::string password_;

@@ -116,7 +116,7 @@ std::string uri::authority() const
     return result;
 }
 
-std::string uri::str() const
+std::string uri::to_string() const
 {
     std::string str;
     if (has_authority_)

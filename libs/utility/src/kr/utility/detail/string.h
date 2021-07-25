@@ -1,5 +1,5 @@
-
-#include <kr/utility/string.h>
+#ifndef KR_COMMON_UITILITY_DETAIL_STRING_H_
+#define KR_COMMON_UITILITY_DETAIL_STRING_H_
 
 namespace kr {
 namespace utility {
@@ -20,3 +20,5 @@ void hex_dump(const void *ptr, std::size_t size, OutIter out)
 }
 } // namespace utility
 } // namespace kr
+
+#endif

@@ -85,7 +85,7 @@ std::string uri_escape(std::string_view str, UriEscapeMode mode)
     while (p != str.end())
     {
         char c = *p;
-        unsigned char v = static_cast<unsigned char>(c);
+        auto v = static_cast<unsigned char>(c);
         unsigned char discriminator = detail::uri_escape_table[v];
         if (LIKELY(discriminator <= min_encode))
         {

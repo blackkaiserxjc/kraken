@@ -61,16 +61,13 @@ int main(int argc, char *argv[])
     // 地址解析
     auto to_endpoint = [](std::string_view address) {
         kr::utility::uri uri(address);
-        return boost::asio::ip::tcp::endpoint(boost::asio::ip::address::from_string(uri.host()),
+        return boost::asio::ip::tcp::endpoint(boost::asio::ip::address::from_string(uri.host().data()),
             boost::lexical_cast<std::uint16_t>(uri.port()));
     };
-
-    std::string a("abc\x00\x02\xa0", 6);
 
     // 主线程logger
     kr::log::logger logger{"Service"};
     KRLOG_INFO(logger, "Main") << "Service Start.";
-    KRLOG_INFO(logger, "Main") << kr::utility::hex_dump(a.data(), a.size());
     // 调度器
     boost::asio::io_context io_context;
 

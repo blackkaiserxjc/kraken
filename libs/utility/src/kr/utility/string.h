@@ -35,6 +35,18 @@ std::string uri_escape(std::string_view str, UriEscapeMode mode = UriEscapeMode:
  */
 std::string uri_unescape(std::string_view str, UriEscapeMode mode = UriEscapeMode::ALL);
 
+template <typename Input, typename Output>
+bool hexlify(const Input &input, Output &output, bool append = false);
+
+template <typename Output = std::string>
+Output hexlify(std::string_view input);
+
+template <typename Input, typename Output>
+bool unhexlify(const Input &input, Output &output);
+
+template <typename Output = std::string>
+Output unhexlify(std::string_view input);
+
 /**
  * A pretty-printer for numbers that appends suffixes of units of the
  * given type.  It prints 4 sig-figs of value with the most

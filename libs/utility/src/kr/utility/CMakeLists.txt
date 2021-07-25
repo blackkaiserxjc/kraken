@@ -5,29 +5,30 @@ include_directories(${Boost_INCLUDE_DIRS})
 include_directories(${FMT_INCLUDE_DIRS})
 
 set(kr_common_utility_SRCS
-    auto_timer.h
-    auto_timer.cpp
-    hash.h
-    murmurhash.h
-    murmurhash.cpp
-    random.h
-    random.cpp
-    string.h
-    string.cpp
-    uri.h
-    uri.cpp
-)
+        auto_timer.h
+        auto_timer.cpp
+        hash.h
+        murmurhash.h
+        murmurhash.cpp
+        random.h
+        random.cpp
+        string.h
+        string.cpp
+        uri.h
+        uri.cpp
+        )
 
 set(kr_common_utility_detail_SRCS
-    detail/auto_timer.h
-    detail/string.h
-)
+        detail/auto_timer.h
+        detail/string.h
+        )
 
 add_library(kr_common_utility
-    ${kr_common_utility_SRCS}
-    ${kr_common_utility_detail_SRCS}
-)
+        ${kr_common_utility_SRCS}
+        ${kr_common_utility_detail_SRCS}
+        )
 target_link_libraries(kr_common_utility
-    kr_common_log
-)
+        kr_common_log
+        )
+
 set_target_properties(kr_common_utility PROPERTIES FOLDER CommonTargets/Utility)
