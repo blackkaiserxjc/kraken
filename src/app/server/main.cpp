@@ -1,9 +1,7 @@
 #include <algorithm>
-#include <atomic>
 #include <csignal>
 #include <cstdlib>
 #include <fstream>
-#include <iterator>
 #include <optional>
 #include <string>
 #include <string_view>
@@ -12,28 +10,25 @@
 #include <boost/asio/ip/basic_endpoint.hpp>
 #include <boost/asio/ip/tcp.hpp>
 #include <boost/asio/signal_set.hpp>
-#include <boost/core/ignore_unused.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/log/utility/setup/from_stream.hpp>
-#include <boost/program_options.hpp>
+#include <cxxopts.hpp>
 #include <sol/sol.hpp>
 
 #include <kr/log/logging.h>
-#include <kr/utility/string.h>
 #include <kr/utility/uri.h>
 
 int main(int argc, char *argv[])
 {
-    boost::program_options::options_description desc("Allowed options");
-    desc.add_options()("help", "help message.")("config", boost::program_options::value<std::string>()->default_value("etc/server.app.lua"), "server config file path");
+    cxxopts::Options options("Allowed options");
+    options.add_options()
+        ("help", "help message")
+        ("config", "server config file path", cxxopts::value<std::string>()->default_value("etc/server.app.lua"));
 
-    boost::program_options::variables_map vm;
-    boost::program_options::store(boost::program_options::parse_command_line(argc, argv, desc), vm);
-    boost::program_options::notify(vm);
-
+    auto vm = options.parse(argc, argv);
     if (vm.count("help"))
     {
-        std::cout << desc << std::endl;
+        std::cout << options.help() << std::endl;
         return EXIT_SUCCESS;
     }
 

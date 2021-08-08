@@ -2,11 +2,11 @@
 // Created by kaiser on 2021/1/1.
 //
 
-#ifndef KRAKEN_CORE_H
-#define KRAKEN_CORE_H
+#ifndef KR_CORE_H_
+#define KR_CORE_H_
 
-#include "config.h"
-#include "lang.h"
-#include "likely.h"
+#include <kr/core/config.h>
+#include <kr/core/lang.h>
+#include <kr/core/likely.h>
 
-#endif //KRAKEN_CORE_H
+#endif //KR_CORE_H
