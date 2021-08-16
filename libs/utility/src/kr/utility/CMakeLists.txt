@@ -8,6 +8,8 @@ set(kr_common_utility_SRCS
         auto_timer.h
         auto_timer.cpp
         hash.h
+        ioc_container.h
+        ioc_container.cpp
         murmurhash.h
         murmurhash.cpp
         random.h
@@ -21,7 +23,7 @@ set(kr_common_utility_SRCS
 set(kr_common_utility_detail_SRCS
         detail/auto_timer.h
         detail/string.h
-        )
+        detail/ioc_container.h)
 
 add_library(kr_common_utility
         ${kr_common_utility_SRCS}
