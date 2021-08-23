@@ -32,6 +32,6 @@ target_link_libraries(kr_common_utility_test
         ${CMAKE_THREAD_LIBS_INIT}
         ${FMT_LIBRARIES}
         )
-add_test(NAME kr_common_utility_test COMMAND kr_common_utility_test)
+#add_test(NAME kr_common_utility_test COMMAND kr_common_utility_test)
 
 set_target_properties(kr_common_utility_test PROPERTIES FOLDER CommonTargets/Utility)
