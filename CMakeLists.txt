@@ -42,6 +42,7 @@ include(libs/log/module.cmake)
 include(libs/network/module.cmake)
 include(libs/utility/module.cmake)
 include(libs/protobuf/module.cmake)
+include(libs/rpc/module.cmake)
 
 add_subdirectory(libs/cli)
 add_subdirectory(libs/core)
@@ -49,6 +50,7 @@ add_subdirectory(libs/log)
 add_subdirectory(libs/network)
 add_subdirectory(libs/protobuf)
 add_subdirectory(libs/utility)
+add_subdirectory(libs/rpc)
 
 # 服务
 add_subdirectory(src)

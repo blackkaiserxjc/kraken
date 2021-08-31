@@ -1,7 +1,9 @@
+#include <utility>
+
 #include <boost/algorithm/string.hpp>
 #include <boost/range/adaptors.hpp>
+
 #include <kr/network/http.h>
-#include <utility>
 
 namespace kr {
 namespace network {
@@ -33,23 +35,16 @@ void router::add_route(const std::string &method, const std::string &path, Handl
         {
             root->children[part] = std::make_shared<node>("", part, part.front() == ':' || part.front() == '*');
         }
-
-        auto child = root->children[part];
-        root.swap(child);
-        /*
-        if (std::weak_ptr<node> weak(root); auto sp = weak.lock())
-        {
-            root.reset(sp->children[part].second);
-        }*/
+        root.swap(root->children[part]);
     }
     root->path = path;
     route_[key] = std::move(handler);
 }
 
 auto router::get_route(const std::string &method, const std::string &path)
-    -> std::tuple<std::shared_ptr<node>, std::map<std::string, std::string>>
+    -> std::tuple<std::shared_ptr<node>, std::unordered_map<std::string, std::string>>
 {
-    std::map<std::string, std::string> params;
+    std::unordered_map<std::string, std::string> params;
     if (!root_.contains(method))
     {
         return std::make_tuple(nullptr, params);
@@ -60,29 +55,30 @@ auto router::get_route(const std::string &method, const std::string &path)
     for (auto iter = search_parts.begin(); iter != search_parts.end(); ++iter)
     {
         std::string temp;
-        for (auto &&[_, child] : node->children)
+        if (node != nullptr && node->children.size() > 0)
         {
-            if (child->part == *iter || child->is_wild)
+            for (auto &&[_, child] : node->children)
             {
-                if (child->part.front() == '*')
+                if (child->part == *iter || child->is_wild)
                 {
-                    std::vector<std::string> vec(iter, search_parts.end());
-                    params[child->part.substr(1)] = boost::algorithm::join(vec, "/");
+                    if (child->part.front() == '*')
+                    {
+                        std::vector<std::string> vec(iter, search_parts.end());
+                        params[child->part.substr(1)] = boost::algorithm::join(vec, "/");
+                    }
+                    if (child->part.front() == ':')
+                    {
+                        params[child->part.substr(1)] = *iter;
+                    }
+                    temp = child->part;
                 }
-                if (child->part.front() == ':')
-                {
-                    params[child->part.substr(1)] = *iter;
-                }
-                temp = child->part;
             }
         }
-
         if (temp.front() == '*')
         {
             return std::make_tuple(node->children[temp], params);
         }
-        auto child = node->children[temp];
-        node.swap(child);
+        node.swap(node->children[temp]);
     }
     return std::make_tuple(node, params);
 }

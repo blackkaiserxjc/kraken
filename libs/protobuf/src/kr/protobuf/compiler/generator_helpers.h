@@ -12,6 +12,7 @@
 
 namespace kr {
 namespace protobuf {
+namespace compiler {
 
 inline bool StripSuffix(std::string *filename, const std::string &suffix)
 {
@@ -34,6 +35,15 @@ inline bool StripPrefix(std::string *filename, const std::string &prefix)
         *name = name->substr(prefix.size());
     }
     return false;
+}
+
+inline std::string StripProto(std::string filename)
+{
+    if (!StripSuffix(&filename, ".protodevel"))
+    {
+        StripSuffix(&filename, ".proto");
+    }
+    return filename;
 }
 
 inline std::string StringReplace(std::string str, const std::string &from, const std::string &to, bool replace_all)
@@ -60,7 +70,7 @@ inline std::vector<std::string> Split(const std::string &input, const std::strin
     boost::algorithm::split(tokens, input, boost::is_any_of(delimiters));
     return tokens;
 }
-
+} // namespace compiler
 } // namespace protobuf
 } // namespace kr
 

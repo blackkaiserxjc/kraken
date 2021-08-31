@@ -1,6 +1,7 @@
 #pragma once
 
 #include <algorithm>
+#include <memory>
 #include <string>
 #include <tuple>
 #include <unordered_map>
@@ -19,6 +20,9 @@ class response
 
 using Handler = std::function<void(const request &, response &)>;
 
+/**
+ * 基于前缀树的http router
+ */
 class router
 {
 public:
@@ -39,7 +43,7 @@ public:
 
     void add_route(const std::string &method, const std::string &path, Handler callback);
     auto get_route(const std::string &method, const std::string &path)
-        -> std::tuple<std::shared_ptr<node>, std::map<std::string, std::string>>;
+        -> std::tuple<std::shared_ptr<node>, std::unordered_map<std::string, std::string>>;
 
 private:
     static auto parse_path(const std::string &path) -> std::vector<std::string>;
