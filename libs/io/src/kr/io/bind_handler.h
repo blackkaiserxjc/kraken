@@ -1,7 +1,7 @@
-#ifndef KR_COMMON_NETWORK_BIND_HANDLER_H_
-#define KR_COMMON_NETWORK_BIND_HANDLER_H_
+#ifndef KR_COMMON_IO_BIND_HANDLER_H_
+#define KR_COMMON_IO_BIND_HANDLER_H_
 
-#include <kr/network/detail/bind_handler.h>
+#include <kr/io/detail/bind_handler.h>
 
 #include <type_traits>
 #include <utility>
@@ -24,3 +24,5 @@ bind_handler(Handler &&handler, Args &&...args)
 
 } // namespace network
 } // namespace kr
+
+#endif

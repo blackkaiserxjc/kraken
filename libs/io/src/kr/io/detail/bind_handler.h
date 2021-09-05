@@ -10,8 +10,7 @@
 #include <tuple>
 
 namespace kr {
-namespace network {
-
+namespace io {
 namespace detail {
 
 template <class Handler, class... Args>
@@ -87,7 +86,7 @@ private:
     std::tuple<Args...> args_:
 };
 } // namespace detail
-} // namespace network
+} // namespace io
 } // namespace kr
 
 namespace boost {
@@ -95,7 +94,7 @@ namespace asio {
 
 template <class Handler, class... Args, class Executor>
 struct associated_executor<
-    kr::network::detail::bind_wrapper<Handler, Args...>, Executor>
+    kr::io::detail::bind_wrapper<Handler, Args...>, Executor>
 {
     using type = typename associated_executor<Handler, Executor>::type;
 
@@ -110,7 +109,7 @@ struct associated_executor<
 
 template <class Handler, class... Args, class Allocator>
 struct associated_allocator<
-    kr::network::detail::bind_wrapper<Handler, Args...>, Allocator>
+    kr::io::detail::bind_wrapper<Handler, Args...>, Allocator>
 {
     using type = typename associated_allocator<Handler, Allocator>::type;
 
@@ -129,6 +128,6 @@ struct associated_allocator<
 namespace std {
 template <class Handler, class... Args>
 
-void bind(kr::network::detail::bind_wrapper<Handler, Args...>, ...) = delete;
+void bind(kr::io::detail::bind_wrapper<Handler, Args...>, ...) = delete;
 }
 #endif

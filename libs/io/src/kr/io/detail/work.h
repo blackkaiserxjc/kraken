@@ -1,11 +1,12 @@
-#ifndef KR_COMMON_NETWORK_DETAIL_WORK_H_
-#define KR_COMMON_NETWORK_DETAIL_WORK_H_
+#ifndef KR_COMMON_IO_DETAIL_WORK_H_
+#define KR_COMMON_IO_DETAIL_WORK_H_
 
 #include <boost/asio/associated_allocator.hpp>
 #include <boost/asio/associated_executor.hpp>
 #include <boost/asio/executor_work_guard.hpp>
+
 namespace kr {
-namespace network {
+namespace io {
 namespace detail {
 
 template <typename Handler>
@@ -107,7 +108,7 @@ private:
 };
 
 } // namespace detail
-} // namespace network
+} // namespace io
 } // namespace kr
 
 #endif

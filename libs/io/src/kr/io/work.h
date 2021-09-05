@@ -1,13 +1,14 @@
-#ifndef KR_COMMON_NETWORK_WORK_H_
-#define KR_COMMON_NETWORK_WORK_H_
+#ifndef KR_COMMON_IO_WORK_H_
+#define KR_COMMON_IO_WORK_H_
 
-#include <kr/network/detail/work.h>
+#include <kr/io/detail/work.h>
+
 namespace kr {
 namespace network {
 
 template <typename Handler>
 auto dispatch(Handler &&handler)
-    -> detail::work_dispather<std::decay_t<Handler>>
+    -> detail::work_dispatcher<std::decay_t<Handler>>
 {
     return {std::forward<Handler>(handler)};
 }

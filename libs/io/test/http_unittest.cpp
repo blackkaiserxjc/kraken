@@ -3,7 +3,7 @@
 //
 
 #include <boost/test/unit_test.hpp>
-#include <kr/network/http.h>
+#include <kr/io/http.h>
 
 BOOST_AUTO_TEST_SUITE(HttpTest)
 
