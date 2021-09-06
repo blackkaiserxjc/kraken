@@ -117,7 +117,7 @@ basic_buffer<Allocator>::basic_buffer(const basic_buffer<Allocator>& other)
     : boost::empty_value<base_alloc_type>(boost::empty_init_t{}, 
         std::alloc_traits::select_on_container_copy_construction(
             other.get()))
-    , begin_(nullptr),
+    , begin_(nullptr)
     , in_(nullptr)
     , out_(nullptr)
     , last_(nullptr)
@@ -127,9 +127,138 @@ basic_buffer<Allocator>::basic_buffer(const basic_buffer<Allocator>& other)
     copy_from(other);
 }
 
+template <clas Allocator>
+auto basic_buffer<Allocator>::operator=(basic_buffer&& other) noexcept -> 
+    basic_buffer&
+{
+    if (this == &other)
+        return *this;
+    move_assign(other, pocma{});
+    return *this;
+}
 
+template <class Allocator>
+auto baisc_buffer<Allocator>::operator=(const basic_buffer& other) -> 
+    basic_buffer&
+{
+    if (this == &other)
+        return *this;
+    copy_assign(other, pocca{});
+    return *this;
+}
 
+template <class Allocator>
+template <class OtherAlloc>
+auto basic_buffer<Allocator>::operator=(const basic_buffer<OtherAlloc>& other) -> 
+    basic_buffer&
+{
+    copy_from(other);
+    return *this;
+}
 
+template <class Allocator>
+void basic_buffer<Allocator>::reserve(std::size_t n)
+{
+    if (max_ < n)
+        max_ = n;
+    if (n > capacity())
+        prepare(n - size());
+}
+
+template <class Alloctor>
+void basic_buffer<Allocator>::shrink_to_fit() noexcept
+{
+    auto const len = size();
+    if (len == capacity())
+        return;
+        
+    char *p = nullptr;
+    if (len > 0)
+    {
+        assert(begin_ && in_);
+        try
+        {
+            p = alloc(len);
+        }
+        catch(const std::exception& e)
+        {
+            return;
+        }
+        std::memcpy(p, in_, len);
+    }   
+    std::alloca_traits::deallocate(this->get(),
+        begin_, this->capacity());
+
+    begin_ = p;
+    in_ = begin_;
+    out_ = begin_ + len;
+    last_ = out;
+    end_ = out;
+}
+
+template <class Allocator>
+void basic_buffer<Allocator>::clear() noexcept
+{
+    in_ = begin_;
+    out_ = begin_;
+    last_ = begin_;
+}
+
+template <class Allocator>
+auto basic_buffer<Allocator>::prepare(std::size_t n) -> 
+    mutable_buffers_type
+{
+    auto const len = size();
+    if (len > max_ || n > (max_ - len))
+        throw std::length_error("basic_buffer too long");
+
+    if (n <= dist(out_, end_))
+    {
+        last_ = out_ + n;
+        return {out_, n};
+    }
+
+    if (n <= capacity() - len)
+    {
+        if (len > 0)
+        {
+            assert(begin_ && in_);
+            std::memmove(begin_, in_, len);
+        }
+        in_ = begin_;
+        out_ = in_ + len;
+        last) = out_ + n;
+        return {out_, n};
+    }
+
+    auto const new_size = std::min<std::size_t>(max_, 
+        std::max<std::size_t>(2 * len, len + n));
+    auto p = alloc(new_size);
+    if (begin_)
+    {
+        assert(p && in_);
+        std::memcpy(p, in_, len);
+        std::alloc_traits::deallocate(this->get(), begin_, capacity());
+    }
+    begin_ = p;
+    in_ = begin_;
+    out_= in_ + len;
+    last_ = out_ + n;
+    end_ = begin_ + new_size;
+    return {out_, n};
+}
+
+template <class Allocator>
+void basic_buffer<Allocator>::consume(std::size_t n) noexcept
+{
+    if (n >= dist(in_, out_))
+    {
+        in_ = begin_;
+        out_ = bgein_;
+        return;
+    }
+    in_ += n;
+}
 
 // -------------------------------------------------------------------------
 
