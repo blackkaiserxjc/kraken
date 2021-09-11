@@ -8,7 +8,7 @@
 #include <stdexcept>
 
 namespace kr {
-namespace utility {
+namespace io{
 compression::compression(CompressType type, std::optional<int> level)
     : type_(type)
 {

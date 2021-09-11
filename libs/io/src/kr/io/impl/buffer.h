@@ -1,6 +1,10 @@
 #ifndef KR_COMMON_IO_IMPL_BUFFER_H_
 #define KR_COMMON_IO_IMPL_BUFFER_H_
 
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include <cassert>
 #include <memory>
 #include <stdexcept>
@@ -21,69 +25,59 @@ basic_buffer<Allocator>::~basic_buffer()
 
 template <class Allocator>
 basic_buffer<Allocator>::basic_buffer() noexcept(default_nothrow)
-    : begin_(nullptr)
-    , in_(nullptr)
-    , out_(nullptr)
-    , last_(nullptr)
-    , end_(nullptr)
-    , max_(std::alloc_traits::max_size(this->get()))
+    : begin_(nullptr), in_(nullptr), out_(nullptr), last_(nullptr), end_(nullptr), max_(std::alloc_traits::max_size(this->get()))
 {
 }
 
 template <class Allocator>
 basic_buffer<Allocator>::basic_buffer(std::size_t limit) noexcept(default_nothrow)
-    : begin_(nullptr)
-    , in_(nullptr)
-    , out_(nullptr)
-    , last_(nullptr)
-    , end_(nullptr)
-    , max_(limit)
+    : begin_(nullptr), in_(nullptr), out_(nullptr), last_(nullptr), end_(nullptr), max_(limit)
 {
 }
 
 template <class Allocator>
-basic_buffer<Allocator>::basic_buffer(const Allocator& alloc) noexcept
+basic_buffer<Allocator>::basic_buffer(const Allocator &alloc) noexcept
     : boost::empty_value<base_alloc_type>(
-        boost::empty_init_t{}, alloc)
-    , begin_(nullptr)
-    , in_(nullptr)
-    , out_(nullptr)
-    , last_(nullptr)
-    , end_(nullptr)
-    , max_(std::alloc_traits::max_size(
-        this->get()))
+        boost::empty_init_t{}, alloc),
+      begin_(nullptr),
+      in_(nullptr),
+      out_(nullptr),
+      last_(nullptr),
+      end_(nullptr),
+      max_(std::alloc_traits::max_size(
+          this->get()))
 {
 }
 
 template <class Allocator>
-basic_buffer<Allocator>::basic_buffer(std::size_t limit, const Allocator& alloc) noexcept
+basic_buffer<Allocator>::basic_buffer(std::size_t limit, const Allocator &alloc) noexcept
     : boost::empty_value<base_alloc_type>(
-        boost::empty_init_t{}, alloc)
-    , begin_(nullptr)
-    , in_(nullptr)
-    , out_(nullptr)
-    , last_(nullptr)
-    , end_(nullptr)
-    , max_(std::alloca_traints::max_size(
-        this->get()))
+        boost::empty_init_t{}, alloc),
+      begin_(nullptr),
+      in_(nullptr),
+      out_(nullptr),
+      last_(nullptr),
+      end_(nullptr),
+      max_(std::alloca_traints::max_size(
+          this->get()))
 {
 }
 
 template <class Allocator>
-basic_buffer<Allocator>::basic_buffer(basic_buffer&& other) noexcept
+basic_buffer<Allocator>::basic_buffer(basic_buffer &&other) noexcept
     : boost_empty_value<base_alloc_type>(
-        boost::empty_init_t{}, std::move(other.get()))
-    , begin_(std::exchange(other.begin_, nullptr))
-    , in_(std::exchange(other.in_, nullptr))
-    , out_(std::exchange(other.out_, nullptr))
-    , last_(std::exchange(other.last_, nullptr))
-    , end_(std::exchange(other.end_, nullptr))
-    , max_(other.max_)
+        boost::empty_init_t{}, std::move(other.get())),
+      begin_(std::exchange(other.begin_, nullptr)),
+      in_(std::exchange(other.in_, nullptr)),
+      out_(std::exchange(other.out_, nullptr)),
+      last_(std::exchange(other.last_, nullptr)),
+      end_(std::exchange(other.end_, nullptr)),
+      max_(other.max_)
 {
 }
 
 template <class Allocator>
-basic_buffer<Allocator>::basic_buffer(basic_buffer&& other, const Allocator& alloc)
+basic_buffer<Allocator>::basic_buffer(basic_buffer &&other, const Allocator &alloc)
     : boost::empty_value<base_alloc_type>(
         boost::empty_init_t{}, alloc)
 {
@@ -111,25 +105,23 @@ basic_buffer<Allocator>::basic_buffer(basic_buffer&& other, const Allocator& all
     other.end_ = nullptr;
 }
 
-
 template <class Allocator>
-basic_buffer<Allocator>::basic_buffer(const basic_buffer<Allocator>& other)
-    : boost::empty_value<base_alloc_type>(boost::empty_init_t{}, 
+basic_buffer<Allocator>::basic_buffer(const basic_buffer<Allocator> &other)
+    : boost::empty_value<base_alloc_type>(boost::empty_init_t{},
         std::alloc_traits::select_on_container_copy_construction(
-            other.get()))
-    , begin_(nullptr)
-    , in_(nullptr)
-    , out_(nullptr)
-    , last_(nullptr)
-    , end_(nullptr)
-    , max_(other.max_)
-{ 
+            other.get())),
+      begin_(nullptr),
+      in_(nullptr),
+      out_(nullptr),
+      last_(nullptr),
+      end_(nullptr),
+      max_(other.max_)
+{
     copy_from(other);
 }
 
 template <clas Allocator>
-auto basic_buffer<Allocator>::operator=(basic_buffer&& other) noexcept -> 
-    basic_buffer&
+auto basic_buffer<Allocator>::operator=(basic_buffer &&other) noexcept -> basic_buffer &
 {
     if (this == &other)
         return *this;
@@ -138,8 +130,7 @@ auto basic_buffer<Allocator>::operator=(basic_buffer&& other) noexcept ->
 }
 
 template <class Allocator>
-auto baisc_buffer<Allocator>::operator=(const basic_buffer& other) -> 
-    basic_buffer&
+auto baisc_buffer<Allocator>::operator=(const basic_buffer &other) -> basic_buffer &
 {
     if (this == &other)
         return *this;
@@ -149,8 +140,7 @@ auto baisc_buffer<Allocator>::operator=(const basic_buffer& other) ->
 
 template <class Allocator>
 template <class OtherAlloc>
-auto basic_buffer<Allocator>::operator=(const basic_buffer<OtherAlloc>& other) -> 
-    basic_buffer&
+auto basic_buffer<Allocator>::operator=(const basic_buffer<OtherAlloc> &other) -> basic_buffer &
 {
     copy_from(other);
     return *this;
@@ -171,7 +161,7 @@ void basic_buffer<Allocator>::shrink_to_fit() noexcept
     auto const len = size();
     if (len == capacity())
         return;
-        
+
     char *p = nullptr;
     if (len > 0)
     {
@@ -180,12 +170,12 @@ void basic_buffer<Allocator>::shrink_to_fit() noexcept
         {
             p = alloc(len);
         }
-        catch(const std::exception& e)
+        catch (const std::exception &e)
         {
             return;
         }
         std::memcpy(p, in_, len);
-    }   
+    }
     std::alloca_traits::deallocate(this->get(),
         begin_, this->capacity());
 
@@ -205,8 +195,7 @@ void basic_buffer<Allocator>::clear() noexcept
 }
 
 template <class Allocator>
-auto basic_buffer<Allocator>::prepare(std::size_t n) -> 
-    mutable_buffers_type
+auto basic_buffer<Allocator>::prepare(std::size_t n) -> mutable_buffers_type
 {
     auto const len = size();
     if (len > max_ || n > (max_ - len))
@@ -231,7 +220,7 @@ auto basic_buffer<Allocator>::prepare(std::size_t n) ->
         return {out_, n};
     }
 
-    auto const new_size = std::min<std::size_t>(max_, 
+    auto const new_size = std::min<std::size_t>(max_,
         std::max<std::size_t>(2 * len, len + n));
     auto p = alloc(new_size);
     if (begin_)
@@ -242,7 +231,7 @@ auto basic_buffer<Allocator>::prepare(std::size_t n) ->
     }
     begin_ = p;
     in_ = begin_;
-    out_= in_ + len;
+    out_ = in_ + len;
     last_ = out_ + n;
     end_ = begin_ + new_size;
     return {out_, n};
@@ -264,9 +253,9 @@ void basic_buffer<Allocator>::consume(std::size_t n) noexcept
 
 template <class Allocator>
 template <class OtherAlloc>
-void basic_buffer<Allocator>::copy_from(const basic_buffer<OtherAlloc>& other)
+void basic_buffer<Allocator>::copy_from(const basic_buffer<OtherAlloc> &other)
 {
-    auto n = other.size();  
+    auto n = other.size();
     if (n == 0 || n > capacity())
     {
         if (begin_ != nullptr)
@@ -280,7 +269,7 @@ void basic_buffer<Allocator>::copy_from(const basic_buffer<OtherAlloc>& other)
             end_ = nullptr;
         }
         if (n == 0)
-            return ;
+            return;
         begin_ = alloc(n);
         in_ = begin_;
         out_ = begin_ + n;
@@ -298,7 +287,7 @@ void basic_buffer<Allocator>::copy_from(const basic_buffer<OtherAlloc>& other)
 }
 
 template <class Allocator>
-void basic_buffer<Allocator>::move_assign(basic_buffer& other, std::true_type)
+void basic_buffer<Allocator>::move_assign(basic_buffer &other, std::true_type)
 {
     if (this->get() != other.get())
     {
@@ -311,15 +300,7 @@ void basic_buffer<Allocator>::move_assign(basic_buffer& other, std::true_type)
 }
 
 template <class Allocator>
-void basic_buffer<Allocator>::move_assign(basic_buffer& other, std::false_type)
-{   
-    max_ = other.max_;
-    this->get() = other.get();
-    copy_from(other);
-}
-
-template <class Alloctor>
-void basic_buffer<Allocator>::copy_assign(const basic_buffer& other, std::true_type)
+void basic_buffer<Allocator>::move_assign(basic_buffer &other, std::false_type)
 {
     max_ = other.max_;
     this->get() = other.get();
@@ -327,7 +308,15 @@ void basic_buffer<Allocator>::copy_assign(const basic_buffer& other, std::true_t
 }
 
 template <class Alloctor>
-void basic_buffer<Allocator>::copy_assign(const basic_buffer& other, std::false_type)
+void basic_buffer<Allocator>::copy_assign(const basic_buffer &other, std::true_type)
+{
+    max_ = other.max_;
+    this->get() = other.get();
+    copy_from(other);
+}
+
+template <class Alloctor>
+void basic_buffer<Allocator>::copy_assign(const basic_buffer &other, std::false_type)
 {
     clear();
     shrink_to_fit();
@@ -336,15 +325,13 @@ void basic_buffer<Allocator>::copy_assign(const basic_buffer& other, std::false_
 }
 
 template <class Alloctor>
-void basic_buffer<Allocator>::swap(basic_buffer& other)
+void basic_buffer<Allocator>::swap(basic_buffer &other)
 {
-
-    swap(other, typename 
-        std::alloc_traits::propagate_on_container_swap{});
+    swap(other, typename std::alloc_traits::propagate_on_container_swap{});
 }
 
 template <class Alloctor>
-void basic_buffer<Allocator>::swap(basic_buffer& other, std::true_type)
+void basic_buffer<Allocator>::swap(basic_buffer &other, std::true_type)
 {
     using std::swap;
     swap(this->get(), other.get());
@@ -358,7 +345,7 @@ void basic_buffer<Allocator>::swap(basic_buffer& other, std::true_type)
 }
 
 template <class Allocator>
-void basic_buffer<Allocator>::swap(basic_buffer& other, std::false_type)
+void basic_buffer<Allocator>::swap(basic_buffer &other, std::false_type)
 {
     assert(this->get() == other.get());
     using std::swap;
@@ -366,18 +353,18 @@ void basic_buffer<Allocator>::swap(basic_buffer& other, std::false_type)
     swap(begin_, other.begin_);
     swap(in_, other.in_);
     last_ = this->out_
-    other.last_ = other.out_;
+                other.last_ = other.out_;
     swap(end_, other.end_);
 }
 
 template <class Allocator>
-void swap(basic_buffer<Allocator>& lhs, basic_buffer<Allocator>& rhs)
+void swap(basic_buffer<Allocator> &lhs, basic_buffer<Allocator> &rhs)
 {
     lhs.swap(rhs);
 }
 
 template <class Allocator>
-char* basic_buffer<Allocator>::alloc(std::size_t n)
+char *basic_buffer<Allocator>::alloc(std::size_t n)
 {
     if (n > std::alloc_traits::max_size(this->get()))
         throw std::length_error("basic_buffer beyond alloctor's maximum size");

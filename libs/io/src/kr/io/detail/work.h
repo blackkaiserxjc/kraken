@@ -1,6 +1,10 @@
 #ifndef KR_COMMON_IO_DETAIL_WORK_H_
 #define KR_COMMON_IO_DETAIL_WORK_H_
 
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include <boost/asio/associated_allocator.hpp>
 #include <boost/asio/associated_executor.hpp>
 #include <boost/asio/executor_work_guard.hpp>
@@ -47,10 +51,10 @@ public:
     void invoke(Executor&& executor, Args&&... args)
     {
         auto alloc = boost::asio::get_associated_allocator(handler_);
-        executor.dispatch([handler = std::move(handler_), args = std::tuple<std::decay_t<Args>>(std::forward<Args>(args)...)]() 
-        {
+        executor.dispatch([handler = std::move(handler_), args = std::tuple<std::decay_t<Args>>(std::forward<Args>(args)...)]() {
             std::apply(handler, std::move(args)...);
-        }, alloc);
+        },
+            alloc);
     }
 
 private:
@@ -96,10 +100,10 @@ public:
     void invoke(Executor&& executor, Args&&... args)
     {
         auto alloc = boost::asio::get_associated_allocator(handler_);
-        executor.post([handler = std::move(handler_), args = std::tuple<std::decay_t<Args>>(std::forward<Args>(args)...)]() 
-        {
+        executor.post([handler = std::move(handler_), args = std::tuple<std::decay_t<Args>>(std::forward<Args>(args)...)]() {
             std::apply(handler, std::move(args)...);
-        }, alloc);
+        },
+            alloc);
     }
 
 private:

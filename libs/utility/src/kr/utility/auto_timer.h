@@ -92,7 +92,6 @@ struct logger final
 };
 
 // 外部使用类型
-template <class Logger, class Clock>
 using auto_timer = basic_auto_timer<logger, std::chrono::high_resolution_clock>;
 
 // 生产器

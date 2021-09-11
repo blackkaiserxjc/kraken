@@ -1,6 +1,10 @@
 #ifndef KR_COMMON_IO_BIND_HANDLER_H_
 #define KR_COMMON_IO_BIND_HANDLER_H_
 
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include <kr/io/detail/bind_handler.h>
 
 #include <type_traits>

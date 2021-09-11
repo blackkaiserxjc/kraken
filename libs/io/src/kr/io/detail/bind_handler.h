@@ -1,5 +1,9 @@
-#ifndef KR_COMMON_NETWORK_DETAIL_BIND_HANDLER_H_
-#define KR_COMMON_NETWORK_DETAIL_BIND_HANDLER_H_
+#ifndef KR_COMMON_IO_DETAIL_BIND_HANDLER_H_
+#define KR_COMMON_IO_DETAIL_BIND_HANDLER_H_
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 #include <boost/asio/associated_allocator.hpp>
 #include <boost/asio/associated_executor.hpp>

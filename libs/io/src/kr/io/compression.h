@@ -16,7 +16,7 @@
 #include <string_view>
 
 namespace kr {
-namespace utility {
+namespace io {
 
 /** 压缩类型 **/
 enum class CompressType
@@ -94,7 +94,7 @@ constexpr int COMPRESS_LEVEL_BEST = -3;
  */
 std::unique_ptr<compression> make_compression(CompressType type, int level = COMPRESS_LEVEL_DEFAULT);
 
-} // namespace utility
+} // namespace io
 } // namespace kr
 
-#endif //KRAKEN_COMPRESS_H
+#endif // KR_COMMON_NET_COMPRESSION_H_

@@ -1,6 +1,10 @@
 #ifndef KR_COMMON_IO_WORK_H_
 #define KR_COMMON_IO_WORK_H_
 
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include <kr/io/detail/work.h>
 
 namespace kr {
