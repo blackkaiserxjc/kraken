@@ -1,0 +1,29 @@
+{
+  "name": "kraken",
+  "version-string": "0.9.1",
+  "dependencies": [
+    "benchmark",
+    "boost-asio",
+    "boost-atomic",
+    "boost-beast",
+    "boost-date-time",
+    "boost-filesystem",
+    "boost-log",
+    "boost-json",
+    "boost-regex",
+    "boost-system",
+    "boost-test",
+    "boost-thread",
+    "cxxopts",
+    "fmt",
+    "gtest",
+    "lua",
+    "protobuf",
+    "rapidjson",
+    "sol2",
+    "zlib",
+    "zstd"
+  ],
+  "overrides": [{ "name": "gtest", "version": "1.10.0", "port-version": 4 }],
+  "builtin-baseline": "a267ab118c09f56f3dae96c9a4b3410820ad2f0b"
+}
