@@ -3,7 +3,7 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/range/adaptors.hpp>
 
-#include <kr/network/http.h>
+#include <kr/io/http.h>
 
 namespace kr {
 namespace network {

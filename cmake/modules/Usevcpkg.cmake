@@ -184,3 +184,42 @@ set(KRAKEN_DEPENDENCY_SOURCE
         "SYSTEM"
         CACHE STRING "The specified value VCPKG is implemented internally as SYSTEM" FORCE)
 
+set(Boost_ROOT
+    "${KRAKEN_VCPKG_PREFIX}"
+    CACHE STRING "")
+set(Boost_INCLUDE_DIR
+    "${KRAKEN_VCPKG_PREFIX}/include/boost"
+    CACHE STRING "")
+set(Boost_LIBRARY_DIR
+    "${KRAKEN_VCPKG_PREFIX}/lib"
+    CACHE STRING "")
+set(OPENSSL_INCLUDE_DIR
+    "${KRAKEN_VCPKG_PREFIX}/include"
+    CACHE STRING "")
+set(OPENSSL_LIBRARIES
+    "${KRAKEN_VCPKG_PREFIX}/lib"
+    CACHE STRING "")
+set(OPENSSL_ROOT_DIR
+    "${KRAKEN_VCPKG_PREFIX}"
+    CACHE STRING "")
+set(ZSTD_INCLUDE_DIR
+    "${KRAKEN_VCPKG_PREFIX}/include"
+    CACHE STRING "")
+set(ZSTD_ROOT
+    "${KRAKEN_VCPKG_PREFIX}"
+    CACHE STRING "")
+set(LZ4_ROOT
+    "${KRAKEN_VCPKG_PREFIX}"
+    CACHE STRING "")
+
+if(CMAKE_HOST_WIN32)
+    set(LZ4_MSVC_LIB_PREFIX
+        ""
+        CACHE STRING "")
+    set(LZ4_MSVC_STATIC_LIB_SUFFIX
+        ""
+        CACHE STRING "")
+    set(ZSTD_MSVC_LIB_PREFIX
+        ""
+        CACHE STRING "")
+endif()

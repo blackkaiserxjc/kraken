@@ -2,7 +2,6 @@ find_package(Boost REQUIRED)
 find_package(Fmt REQUIRED)
 
 include_directories(${Boost_INCLUDE_DIRS})
-include_directories(${FMT_INCLUDE_DIRS})
 
 set(kr_common_io_SRCS
         bind_handler.h

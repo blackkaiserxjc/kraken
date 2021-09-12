@@ -1,6 +1,6 @@
 find_package(Boost REQUIRED)
 
-include_directories(${Boost_INCLUDE_DIRS})
+include_directories(${BOOST_INCLUDE_DIRS})
 
 set(kr_common_cli_SRCS
     cli.h
