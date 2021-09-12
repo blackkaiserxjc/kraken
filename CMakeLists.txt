@@ -35,6 +35,11 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 #第三方库模块
 list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake/modules")
 
+# 使用vcpkg安装依赖
+if (KRAKEN_DEPENDENCY_SOURCE STREQUAL "VCPKG")
+    include(Usevcpkg)
+endif ()
+
 # 核心库
 include(libs/cli/module.cmake)
 include(libs/core/module.cmake)
