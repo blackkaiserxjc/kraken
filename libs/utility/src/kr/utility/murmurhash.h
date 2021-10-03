@@ -1,9 +1,4 @@
-#ifndef KR_COMMON_UTILITY_MURMURHASH_H_
-#define KR_COMMON_UTILITY_MURMURHASH_H_
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
-#endif
 
 #include <cstdint>
 #include <string_view>
@@ -32,5 +27,3 @@ struct murmur_hash
 
 } // namespace utility
 } // namespace kr
-
-#endif

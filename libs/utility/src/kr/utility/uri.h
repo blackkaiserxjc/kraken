@@ -2,12 +2,7 @@
 // Created by kaiser on 2021/6/22.
 //
 
-#ifndef KR_COMMON_UTILITY_URI_H_
-#define KR_COMMON_UTILITY_URI_H_
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
-#endif
 
 #include <cctype>
 #include <string>
@@ -18,7 +13,7 @@
 namespace kr {
 namespace utility {
 
-/** uri解析类 
+/** uri解析类
  * The class for URI scheme : http://en.wikipedia.org/wiki/URI_scheme
  *
  *  foo://username:password@example.com:8042/over/there/index.dtb?type=animal&name=narwhal#nose
@@ -38,7 +33,7 @@ namespace utility {
  *                                                             |
  *                                                             |
  * 示例 https://user:password@www.contoso.com:80/Home/Index.htm?q1=v1&q2=v2#FragmentName
- * 
+ *
  * scheme: http
  * username: user
  * password: password
@@ -51,7 +46,7 @@ namespace utility {
 class uri
 {
 public:
-    /** 
+    /**
      * 构造函数
      * @param sv 字符串
      */
@@ -59,7 +54,7 @@ public:
 
     /**
      * 获取scheme
-     * @return scheme 
+     * @return scheme
      */
     std::string_view scheme() const
     {
@@ -68,7 +63,7 @@ public:
 
     /**
      * 获取username
-     * @return username 
+     * @return username
      */
     std::string_view username() const
     {
@@ -143,7 +138,7 @@ public:
 
     /**
      * 转换为字符串
-     * @return uri string 
+     * @return uri string
      */
     std::string to_string() const;
 
@@ -180,5 +175,3 @@ private:
 
 } // namespace utility
 } // namespace kr
-
-#endif // KR_COMMON_UTILITY_URI_H_

@@ -9,6 +9,7 @@
     "lua",
     "protobuf",
     "rapidjson",
+    "msgpack",
     "sol2",
     "zlib",
     "zstd"

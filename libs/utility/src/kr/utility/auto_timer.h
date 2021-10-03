@@ -1,9 +1,4 @@
-#ifndef KR_COMMON_UTILITY_AUTO_TIMER_H_
-#define KR_COMMON_UTILITY_AUTO_TIMER_H_
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
-#endif
 
 #include <chrono>
 #include <optional>
@@ -110,5 +105,3 @@ auto make_auto_timer(std::string &&msg = "",
 } // namespace kr
 
 #include <kr/utility/detail/auto_timer.h>
-
-#endif

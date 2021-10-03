@@ -2,12 +2,7 @@
 // Created by kaiser on 2021/1/2.
 //
 
-#ifndef KR_COMMON_NET_COMPRESSION_H_
-#define KR_COMMON_NET_COMPRESSION_H_
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
-#endif
 
 #include <cstdint>
 #include <memory>
@@ -96,5 +91,3 @@ std::unique_ptr<compression> make_compression(CompressType type, int level = COM
 
 } // namespace io
 } // namespace kr
-
-#endif // KR_COMMON_NET_COMPRESSION_H_

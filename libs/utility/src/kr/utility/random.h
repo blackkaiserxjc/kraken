@@ -1,13 +1,7 @@
 //
 // Created by alien on 2021/2/14.
 //
-
-#ifndef KR_COMMON_UTILITY_RANDOM_H_
-#define KR_COMMON_UTILITY_RANDOM_H_
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
-#endif
 
 #include <cstdint>
 #include <random>
@@ -33,7 +27,7 @@ public:
 
     /**
      * 生成下一个随机数
-     * @return 随机数 
+     * @return 随机数
      */
     std::uint32_t next();
 
@@ -41,7 +35,7 @@ public:
      * 生成一个整数随机数,随机数范围[min, max]
      * @param min 最小值
      * @param max 最大值
-     * @return 随机数 
+     * @return 随机数
      */
     std::uint32_t randint(std::uint32_t min, std::uint32_t max);
 
@@ -75,7 +69,7 @@ public:
 
     /**
      * 生成下一个随机数
-     * @return 随机数 
+     * @return 随机数
      */
     std::uint64_t next();
 
@@ -83,7 +77,7 @@ public:
      * 生成一个整数随机数,随机数范围[min, max]
      * @param min 最小值
      * @param max 最大值
-     * @return 随机数 
+     * @return 随机数
      */
     std::uint64_t randint64(std::uint64_t min, std::uint64_t max);
 
@@ -101,5 +95,3 @@ private:
 
 } // namespace utility
 } // namespace kr
-
-#endif //KR_COMMON_UTILITY_RANDOM_H_

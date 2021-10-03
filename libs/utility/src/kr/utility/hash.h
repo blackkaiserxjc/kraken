@@ -1,9 +1,7 @@
 //
 // Created by kaiser on 2021/1/1.
 //
-
-#ifndef KR_COMMON_UTILITY_HASH_H_
-#define KR_COMMON_UTILITY_HASH_H_
+#pragma once
 
 #include <cstddef>
 #include <cstdint>
@@ -28,5 +26,3 @@ inline std::uint32_t hash_str(std::string_view sv)
 
 } // namespace utility
 } // namespace kr
-
-#endif //KR_COMMON_UTILITY_HASH_H

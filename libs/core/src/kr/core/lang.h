@@ -1,9 +1,7 @@
 //
 // Created by kaiser on 2020/12/27.
 //
-
-#ifndef KR_COMMON_CORE_LANG_H_
-#define KR_COMMON_CORE_LANG_H_
+#pragma once
 
 #ifndef FALLTHROUGH_INTENDED
 #if defined(__clang__)
@@ -17,5 +15,3 @@
     } while (0)
 #endif
 #endif
-
-#endif // KR_COMMON_CORE_LANG_H_

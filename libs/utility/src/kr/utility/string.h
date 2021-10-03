@@ -2,8 +2,7 @@
 // Created by kaiser on 2021/3/21.
 //
 
-#ifndef KR_COMMON_UTILITY_HASH_H_
-#define KR_COMMON_UTILITY_HASH_H_
+#pragma once
 
 #include <cstdint>
 #include <string>
@@ -31,7 +30,7 @@ std::string uri_escape(std::string_view str, UriEscapeMode mode = UriEscapeMode:
  * uri解码
  * @param str uri原串
  * @param mode 模式
- * @return uri解码串 
+ * @return uri解码串
  */
 std::string uri_unescape(std::string_view str, UriEscapeMode mode = UriEscapeMode::ALL);
 
@@ -103,5 +102,3 @@ std::string hex_dump(const void *ptr, std::size_t size);
 } // namespace kr
 
 #include "detail/string.h"
-
-#endif

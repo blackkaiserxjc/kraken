@@ -1,4 +1,4 @@
-find_package(Boost)
+find_package(Boost REQUIRED)
 find_package(ZLIB REQUIRED)
 
 include_directories(${Boost_INCLUDE_DIRS})
