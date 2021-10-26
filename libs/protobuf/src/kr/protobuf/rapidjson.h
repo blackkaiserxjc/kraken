@@ -106,9 +106,9 @@ public
         return *this;
     }
 
-    packer &pack_array_end()
+    packer &pack_array_end(std::uint32_t count = 0)
     {
-        packer_.EndArray();
+        packer_.EndArray(count);
         return *this;
     }
 
@@ -119,9 +119,9 @@ public
         return *this;
     }
 
-    packer &pack_map_end()
+    packer &pack_map_end(std::uint32_t count = 0)
     {
-        packer_.EndObject();
+        packer_.EndObject(count);
         return *this;
     }
 

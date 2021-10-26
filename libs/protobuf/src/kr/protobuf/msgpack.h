@@ -1,6 +1,9 @@
 #pragma once
 
+#include <msgpack/object.hpp>
 #include <msgpack/pack.h>
+
+#include <kr/core/type.h>
 
 namespace kr {
 namespace protobuf {
@@ -76,7 +79,7 @@ public:
         return *this;
     }
 
-    packer &pack_array_end()
+    packer &pack_array_end(std::uint32 count = 0)
     {
         return *this;
     }
@@ -88,6 +91,11 @@ public:
     }
 
     packer &packer_map_end()
+    {
+        return *this;
+    }
+
+    packer &pack_map_end(std::uint32_t count = 0)
     {
         return *this;
     }
@@ -111,6 +119,24 @@ private:
     msgpack::packer<Stream> &packer_;
 };
 
+template <>
+class unpacker<msgpack::object>
+{
+public:
+    explicit unpacker(const msgpack::object &object)
+        : object_(object)
+    {
+    }
+
+    template <typename T>
+    T as() const
+    {
+        return object_.as<T>();
+    }
+
+private
+    const msgpack::object object_;
+};
 } // namespace protobuf
 } // namespace kr
 namespace

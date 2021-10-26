@@ -3,11 +3,16 @@
 namespace kr {
 namespace protobuf {
 
-template <typename Stream>
+// read handler concept
+template <typename Layer>
 class unpacker
 {
 public:
-    
+    template <typename T>
+    T as() const;
+
+    template <typename T, typename Action, typename Expect>
+    void to(Action &&action, Expect &&expect);
 };
 
 } // namespace protobuf

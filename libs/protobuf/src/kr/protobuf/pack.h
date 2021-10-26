@@ -4,7 +4,7 @@
 
 #pragma once
 
-#include <cstdint>
+#include <kr/core/type.h>
 
 namespace kr {
 namespace protobuf {
@@ -26,10 +26,10 @@ public:
     packer &pack_string_view(std::string_view v);
 
     packer &pack_array_begin(std::uint32_t size);
-    packer &pack_array_end();
+    packer &pack_array_end(std::uint32_t count = 0);
 
     packer &pack_map_begin(std::uint32_t size);
-    packer &pack_map_end();
+    packer &pack_map_end(std::uint32_t count = 0);
 
     template <typename T>
     packer &key(const T &value);
