@@ -85,12 +85,6 @@ constexpr bool operator>=(const unexpected<E> &lhs, const unexpected<E> &rhs)
     return lhs.value() >= rhs.value();
 }
 
-template <class E>
-auto make_unexpected(E &&e)
-{
-    return unexpected<typename std::decay_t<E>>(std::forward<E>(e));
-}
-
 struct unexpected_t
 {
     unexpected_t() = default;
@@ -965,6 +959,14 @@ void swap(expected<T, E> &x, expected<T, E> &y)
 } // namespace core
 } // namespace kr
 
+template <class E>
+using unexpected = kr::core::unexpected<E>;
+
+template <class E>
+auto make_unexpected(E &&e)
+{
+    return unexpected<typename std::decay_t<E>>(std::forward<E>(e));
+}
 inline constexpr auto &unexpect = kr::core::unexpect;
 
 template <class T, class E>

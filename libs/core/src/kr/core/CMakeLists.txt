@@ -12,7 +12,7 @@ set(kr_common_core_SRCS
         likely.h
         type_traits.h
         type.h
-)
+        )
 
 add_library(kr_common_core INTERFACE ${kr_common_core_SRCS})
 set_target_properties(kr_common_core PROPERTIES FOLDER CommonTargets/Core)
